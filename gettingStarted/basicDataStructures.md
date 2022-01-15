@@ -13,8 +13,10 @@
       - As such, Depth-First Search uses a stack, either directly or through the use of recursion
 ### Implementation
 - using an (statically-sized) array and a pointer pointing to the top of the stack (usually the next unused space)
-- When inserting an item, we set the value at the pointer to the item and increment the pointer by 1
-- When removing an item, we decrease the pointer by 1
+- When inserting an item
+  - set the value at the pointer to the item and increment the pointer by 1
+- When removing an item
+  - decrease the pointer by 1
 - no need to reset the item at the pointer because it isn't accessible by the stack
   - it will be overwritten when more items are inserted
     - might still want to reset it for languages with garbage collectors to prevent memory leaks
@@ -41,4 +43,51 @@
     print(stack[-1])
     # Removing the top item from the stack
     stack.pop()
+    ```
+## Queue
+- `first in, first out` property
+- an item can be inserted and removed from the queue
+- but an item can only be removed from the queue after all the items added before it are removed first
+- supports three operations
+  1. Insert (or "Push"): Putting an item into the end of the queue
+  2. Peek: Look at the first item of the queue
+  3. Remove (or "Pop"): Remove the first item of the queue
+### Implementation
+- use an array and two pointers
+  - one pointing to the start of the queue, and one pointing at the end of the queue
+- When inserting an item into the queue
+  - set the entry at the end pointer to the value and increase the end pointer by one
+- When removing an item from the queue, increase the start pointer by one
+### Deque 
+- is a double-ended queue
+- inserting and removing items from the queue can be done on both end
+- can use the same implentation logic, but allow the increment and decrement of both start and end pointers
+### Caution
+- One of the flaws of the current implementation
+  - when one of the queue pointers reaches the end of the array, it will cause an overflow
+  - However, if some elements have been removed from the other end
+    - then when the queue overflows, there are still a lot of unused empty spaces
+  - improvement that can be done on this implementation is to make the array "loop"
+    - When a pointer tries to move past the array, it loops around to the other end of the array instead
+      - This is known as a `Circular Buffer`
+- Most modern programming languages offer a built-in deque data structure
+  - and they often use a dynamic array as its underlying data structure
+  - they can also use a double-linked list, like Python's deque class 
+    - won't have to worry about deques overflowing because the resizing of the array is handled for you
+  - e.g. python
+    ```python
+    # Initialize a new deque
+    queue = deque()
+    # Add 2 to the end of the deque
+    queue.append(2)
+    # Add 4 to the front of the deque
+    queue.appendleft(4)
+    # Look at the end of the deque and print it
+    print(queue[-1])
+    # Look at the front of the deque and print it
+    print(queue[0])
+    # Remove the end of the deque
+    queue.pop()
+    # Remove the front of the deque
+    queue.popleft()
     ```
