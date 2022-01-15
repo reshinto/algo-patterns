@@ -1,4 +1,4 @@
-# Cheat Sheet Patterns
+# Keywords
 ## Runtime
 - usually do not consider constants when analyzing the time complexity
 - usually want to find the "family" of functions that most closely the growth in computational time
