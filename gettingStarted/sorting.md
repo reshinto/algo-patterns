@@ -17,6 +17,9 @@
   - and inserting from the unsorted pile into the sorted pile in the correct position
 - It is a `stable algorithm` because later elements will not swap with earlier elements unless the later element is smaller
 - it is an `in-place algorithm` because no additional data structure is used to store intermediate values
+
+![insertionSort](../images/insertionSort.gif)
+
 ### JavaScript
 ```javascript
 function sortList(unsortedList) {
@@ -83,6 +86,9 @@ output: [1, 2, 3, 4, 5]
   - The element is now part of the sorted pile
 - `not a stable algorithm` because an earlier element can jump after an element of the same value during a swap
 - `algorithm is in-place` as it only needs additional memory to store the index to the minimum element
+
+![selectionSort](../images/selectionSort.gif)
+
 ### JavaScript
 ```javascript
 function sortList(unsortedList) {
