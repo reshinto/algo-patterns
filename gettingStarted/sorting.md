@@ -33,7 +33,7 @@ function sortList(unsortedList) {
 }
 
 const test = [5, 3, 1, 2, 4];
-const res = sortList(test);
+const result = sortList(test);
 console.log(test);
 ```
 ```
@@ -106,7 +106,7 @@ function sortList(unsortedList) {
 }
 
 const test = [5, 3, 1, 2, 4];
-const res = sortList(test);
+const result = sortList(test);
 console.log(test);
 ```
 ```
@@ -195,7 +195,7 @@ function sortList(unsortedList) {
 }
 
 const test = [5, 3, 1, 2, 4];
-const res = sortList(test);
+const result = sortList(test);
 console.log(test);
 ```
 ```
@@ -240,4 +240,73 @@ output: [1, 2, 3, 4, 5]
 - time complexity of this algorithm is `O(n^2)`
   - because it is essentially two loops
 ## Merge Sort
+- idea of a merge sort is divide and conquer
+  - We divide the array into two almost equally
+    - sort them (usually another merge sort)
+    - and merge the two sorted list into one
+  - To merge the two sorted list
+    - have two pointers point towards the bottom of the two list
+    - and each step, add the smaller element from those two into the list
+    - and move the pointer of that item up by one until elements from both lists are fully added
+- Assume the sorting of the divided list is stable, the overall algorithm is stable
+  - because if an element appears before another element with the same value, there are two situations
+    1. If they are in the same list
+        - the first element is before the second one in that list
+        - and the first one will be inserted first
+    2. If they are in different lists
+        - the first element will be inserted first if two elements are equal
+- Note that the base case, where only one element exists in the list is stable
+  - because there are no 2 elements of the same size, so merge sort is stable
+- merge sort is not in-place because of the usage of additional arrays
+
+![mergeSort](../images/mergeSort.gif)
+
+### JavaScript
+#### Recursion
+```javascript
+function merge(leftList, rightList, midIndex, n) {
+  const result = [];
+  let leftIndex = 0;
+  let rightIndex = 0;
+  while (leftIndex < midIndex || rightIndex < n - midIndex) {
+    if (leftIndex === midIndex) {
+      result.push(rightList[rightIndex]);
+      rightIndex++;
+    } else if (rightIndex === n - midIndex) {
+      result.push(leftList[leftIndex]);
+      leftIndex++;
+    } else if (leftList[leftIndex] <= rightList[rightIndex]) {
+      result.push(leftList[leftIndex]);
+      leftIndex++;
+    } else {
+      result.push(rightList[rightIndex]);
+      rightIndex++;
+    }
+  }
+  return result;
+}
+
+function sortList(unsortedList) {
+  const n = unsortedList.length;
+  if (n <= 1) return unsortedList;
+
+  const midIndex = Math.floor(n / 2);
+  const leftList = sortList(unsortedList.slice(0, midIndex));
+  const rightList = sortList(unsortedList.slice(midIndex));
+  const sortedList = merge(leftList, rightList, midIndex, n);
+  return sortedList;
+}
+
+const test = [5, 3, 1, 2, 4];
+const result = sortList(test)
+console.log(result)
+```
+#### Iterative
+```javascript
+```
+### time space complexity
+- overall time complexity is `O(nlog(n))`
+  - because for each item in the list
+    - it is merged a number of times equal to the number of divisions to make to divide the list to a size of one
+      - which is `O(log(n))` times
 ## Quick Sort
