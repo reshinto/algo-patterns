@@ -33,8 +33,8 @@ function sortList(unsortedList) {
 }
 
 const test = [5, 3, 1, 2, 4];
-const res = sortList(test)
-console.log(test)
+const res = sortList(test);
+console.log(test);
 ```
 ```
 input: [5, 3, 1, 2, 4]
@@ -106,8 +106,8 @@ function sortList(unsortedList) {
 }
 
 const test = [5, 3, 1, 2, 4];
-const res = sortList(test)
-console.log(test)
+const res = sortList(test);
+console.log(test);
 ```
 ```
 input: [5, 3, 1, 2, 4]
@@ -163,5 +163,81 @@ output: [1, 2, 3, 4, 5]
 - Overall, the time complexity is `O(n * (n + 1) / 2)`
   - which is equivalent to `O(n^2)`
 ## Bubble Sort
+- idea of bubble sort is for each pass, we use a pointer to point at the first element of the list
+  - For each cycle, we compare it to the next element in the list
+  - and swap them if the current item is greater
+  - then move the pointer by one until it reaches the end of the list
+  - We repeat this process until the list becomes sorted
+  - The list is sorted if, during a pass, no swapping occurs
+- Note that during each pass, the largest element will always "float" to the top, like a bubble
+  - Therefore, each pass, we only need to consider the interval excluding the last element of the previous interval
+    - and the list is guaranteed to be sorted within n passes
+- It is a stable algorithm because a swap cannot cause an element to move past another one with the same value
+  - and it is in-place because no additional data structure is used
+
+![bubbleSort](../images/bubbleSort.gif)
+
+### JavaScript
+```javascript
+function sortList(unsortedList) {
+  const n = unsortedList.length;
+  for (let i=n-1; i>=0; i--) {
+    let swapped = false;
+    for (let j=0; j<i; j++) {
+      if (unsortedList[j] > unsortedList[j + 1]) {
+        [unsortedList[j], unsortedList[j+1]] = [unsortedList[j+1], unsortedList[j]];
+        swapped = true;
+      }
+    }
+    if (!swapped) return unsortedList;
+  }
+  return unsortedList;
+}
+
+const test = [5, 3, 1, 2, 4];
+const res = sortList(test);
+console.log(test);
+```
+```
+input: [5, 3, 1, 2, 4]
+
+i=4
+set swapped to false
+loop 4 times
+1st loop is input[j] > input[j+1] = true
+5 > 3, swap 5 with 3 = [3, 5, 1, 2, 4], set swapped to true
+2nd loop is input[j] > input[j+1] = true
+5 > 1, swap 5 with 1 = [3, 1, 5, 2, 4], set swapped to true
+3rd loop is input[j] > input[j+1] = true
+5 > 2, swap 5 with 2 = [3, 1, 2, 5, 4], set swapped to true
+4th loop is input[j] > input[j+1] = true
+5 > 4, swap 5 with 4 = [3, 1, 2, 4, 5], set swapped to true, end inner loop
+since swapped is true, move to next outter loop
+
+i=3
+set swapped to false
+loop 3 times
+1st loop is input[j] > input[j+1] = true
+3 > 1, swap 3 with 1 = [1, 3, 2, 4, 5], set swapped to true
+2nd loop is input[j] > input[j+1] = true
+3 > 2, swap 3 with 2 = [1, 2, 3, 4, 5], set swapped to true
+3rd loop is input[j] > input[j+1] = false
+3 < 4, swap 3 with 2 = [1, 2, 3, 4, 5], end inner loop
+since swapped is true, move to next outter loop
+
+i=2
+set swapped to false
+loop 2 times
+1st loop is input[j] > input[j+1] = false
+1 < 2, no swap, move to next inner loop
+2nd loop is input[j] > input[j+1] = false
+2 < 3, no swap, end inner loop
+since swapped is false, end outter loop and return sorted array
+
+output: [1, 2, 3, 4, 5]
+```
+### time space complexity
+- time complexity of this algorithm is `O(n^2)`
+  - because it is essentially two loops
 ## Merge Sort
 ## Quick Sort
