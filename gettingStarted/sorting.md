@@ -301,6 +301,147 @@ const test = [5, 3, 1, 2, 4];
 const result = sortList(test)
 console.log(result)
 ```
+```
+input: [5, 3, 1, 2, 4]
+
+  [5, 3, 1, 2, 4]
+   /         \
+[5, 3]    [1, 2, 4]
+n > 1, midIndex is 2
+work on the original left half first [5, 3]
+add sortList(unsortedList.slice(0, 2)) to the stack
+------------------
+|sortList([5, 3])|
+------------------
+
+new unsortedList is [5, 3]
+ [5, 3]
+ /   \
+[5]  [3]
+since n > 1, new midIndex is 1
+work on the new 1st left half [5]
+new unsortedList is [5]
+since n = 1, return [5]
+------------------
+|sortList([5, 3])|
+------------------
+
+leftList = [5]
+work on the new 1st right half [3]
+new unsortedList = [3]
+since n = 1, return [3]
+------------------
+|sortList([5, 3])|
+------------------
+
+rightList = [3]
+start merging leftList = [5] and rightList = [3]
+midIndex remains at 1, n remains at 2
+leftIndex = 0, rightIndex = 0, loop starts
+since leftList[leftIndex] > rightList[rightIndex], 5 > 3
+3 is added to the result array, rightIndex increment by 1 and is now 1, go to next loop
+result array is [3]
+since rightIndex === n - midIndex, 1 === 2 - 1
+5 is added to the result array, leftIndex increment by 1 and is now 1
+both leftIndex === midIndex & rightIndex === n - midIndex, end loop
+result array is [3, 5]
+--------
+|[3, 5]|
+--------
+original left array = [3, 5]
+
+new unsortedList is [1, 2, 4]
+work on the original right half first [1, 2, 4]
+add sortList(unsortedList.slice(2)) to the stack
+---------------------
+|sortList([1, 2, 4])|
+---------------------
+
+ [1, 2, 4]
+  /     \
+[1]    [2, 4]
+new unsortedList is [1]
+work on the new 2nd left half [1]
+since n = 1, return [1]
+
+leftList = [1]
+work on the new 2nd right half [2, 4]
+add sortList(unsortedList.slice(1)) to the stack
+---------------------
+|sortList([2, 4])   |
+|sortList([1, 2, 4])|
+---------------------
+
+new unsortedList is [2, 4]
+ [2, 4]
+ /   \
+[2]  [4]
+since n > 1, new midIndex is 1
+work on the new 3rd left half [2]
+new unsortedList is [2]
+since n = 1, return [2]
+
+leftList = [2]
+work on the new 3rd right half [4]
+new unsortedList is [4]
+since n = 1, return [4]
+
+rightList = [4]
+start merging leftList = [2] and rightList = [4]
+midIndex is 1, n is 2
+leftIndex = 0, rightIndex = 0, loop starts
+since leftList[leftIndex] < rightList[rightIndex], 2 < 4
+2 is added to the result array, leftIndex increment by 1 and is now 1, go to next loop
+result array is [2]
+since rightIndex === n - midIndex, 1 === 2 - 1
+4 is added to the result array, leftIndex increment by 1 and is now 1
+both leftIndex === midIndex & rightIndex === n - midIndex, end loop
+result array is [2, 4]
+return [2, 4]
+---------------------
+|[2, 4]             |
+|sortList([1, 2, 4])|
+---------------------
+
+start merging leftList = [1] and rightList = [2, 4]
+midIndex is 1, n is 3
+leftIndex = 0, rightIndex = 0, loop starts
+since leftList[leftIndex] < rightList[rightIndex], 2 < 4
+1 is added to the result array, leftIndex increment by 1 and is now 1, go to next loop
+since leftIndex === midIndex at 1
+2 is added to the result array, rightIndex increment by 1 and is now 1, go to next loop
+since leftIndex === midIndex at 1
+4 is added to the result array, rightIndex increment by 1 and is now 1, go to next loop
+both leftIndex === midIndex & rightIndex === n - midIndex, end loop
+result array is [1, 2, 4]
+return [1, 2, 4]
+------------------
+|[1, 2, 4]       |
+------------------
+
+  [5, 3, 1, 2, 4]
+   /         \
+[3, 5]    [1, 2, 4]
+original right array is [1, 2, 4]
+start merging leftList = [3, 5] and rightList = [1, 2, 4]
+midIndex is 2, n is 5
+leftIndex = 0, rightIndex = 0, loop starts
+since leftList[leftIndex] > rightList[rightIndex], 3 > 1
+1 is added to the result array, rightIndex increment by 1 and is now 1, go to next loop
+since leftList[leftIndex] > rightList[rightIndex], 3 > 2
+2 is added to the result array, rightIndex increment by 1 and is now 2, go to next loop
+since leftList[leftIndex] < rightList[rightIndex], 3 < 4
+3 is added to the result array, leftIndex increment by 1 and is now 2, go to next loop
+since leftList[leftIndex] > rightList[rightIndex], 5 > 4
+4 is added to the result array, rightIndex increment by 1 and is now 3, go to next loop
+since rightIndex === n - midIndex, 3
+5 is added to the result array, left Index increment by 1 and is now 3, go to next loop
+both leftIndex === midIndex & rightIndex === n - midIndex, end loop
+result array is [1, 2, 3, 4, 5]
+return [1, 2, 3, 4, 5]
+
+output: [1, 2, 3, 4, 5]
+```
 #### Iterative
 ```javascript
 ```
