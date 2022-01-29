@@ -745,6 +745,94 @@ const test = [5, 3, 1, 2, 4];
 const result = sortList(test)
 console.log(test)
 ```
+```
+input: [5, 3, 1, 2, 4]
+
+n = 5
+set start as 0, end as 5
+end - start = 5 - 0 = 5 <= 1, false, continue
+pivot = array[end - 1] = array[4] = 4
+startPointer = start = 0
+endPointer = end - 1 = 5 - 1 = 4
+is startPointer < endPointer, 0 < 4, true, start 1st outer loop
+is array[startPointer] < pivot && startPointer < endPointer, array[0] < 4 && 0 < 4, 5 < 4 && 0 < 4, false, loop does not start
+is array[endPointer] >= pivot && startPointer < endPointer, array[4] >= 4 && 0 < 4, 4 >= 4 && 0 < 4, true, start 1st inner loop
+endPointer decrement by 1, endPointer = 3
+array[3] >= 4 && 0 < 3, 2 >= 4 && 0 < 3, false, end inner loop
+is startPointer === endPointer, 0 === 3, false, continue
+swap array[startPointer] with array[endPointer], array[0] with array[3], 5 with 2
+[5, 3, 1, 2, 4] -> [2, 3, 1, 5, 4]
+
+is startPointer < endPointer, 0 < 3, true, continue 2nd outer loop
+is array[startPointer] < pivot && startPointer < endPointer, array[0] < 4 && 0 < 3, 2 < 4 && 0 < 3, true, start 1st inner loop
+startPointer increment by 1, startPointer = 1
+array[1] < 4 && 1 < 3, 3 < 4 && 1 < 3, true, continue 2nd inner loop
+startPointer increment by 1, startPointer = 2
+array[2] < 4 && 2 < 3, 1 < 4 && 2 < 3, true, continue 2nd inner loop
+startPointer increment by 1, startPointer = 3
+array[3] < 4 && 3 < 3, 5 < 4 && 3 < 3, false, break inner loop
+
+is array[endPointer] >= pivot && startPointer < endPointer, array[3] >= 4 && 3 < 3, 5 >= 4 && 3 < 3, false, loop does not start
+is startPointer === endPointer, 3 === 3, true, break outer loop
+swap array[startPointer] with array[end - 1], array[3] with array[4], 5 with 4
+[2, 3, 1, 5, 4] -> [2, 3, 1, 4, 5]
+
+call 1st left recursion
+start = 0
+end = startPointer = 3
+end - start = 3 - 0 = 3 <= 1, false, continue
+pivot = array[end - 1] = array[3 - 1] = array[2] = 1
+startPointer = start = 0
+endPointer = end - 1 = 3 - 1 = 2
+is startPointer < endPointer, 0 < 2, true, start 1st outer loop
+is array[startPointer] < pivot && startPointer < endPointer, array[0] < 1 && 0 < 2, 2 < 1 && 0 < 2, false, loop does not start
+is array[endPointer] >= pivot && startPointer < endPointer, array[2] >= 1 && 0 < 2, 1 >= 1 && 0 < 2, true, start 1st inner loop
+endPointer decrement by 1, endPointer = 1
+array[1] >= 1 && 0 < 1, 3 >= 1 && 0 < 1, true, continue 2nd inner loop
+endPointer decrement by 1, endPointer = 0
+array[0] >= 1 && 0 < 0, 2 >= 1 && 0 < 0, false, end inner loop
+is startPointer === endPointer, 0 === 0, end outer loop
+swap array[startPointer] with array[end - 1], array[0] with array[2], 2 with 1
+[2, 3, 1, 4, 5] -> [1, 3, 2, 4, 5]
+
+call 2nd left recursion
+start = 0
+end = startPointer = 0
+end - start = 0 - 0 = 0 <= 1, true, return undefined
+
+call 2nd right recursion
+start = startPointer + 1 = 0 + 1 = 1
+end = 3
+end - start = 3 - 1 = 2 <= 1, false, continue
+pivot = array[end - 1] = array[3 - 1] = array[2] = 2
+startPointer = start = 1
+endPointer = end - 1 = 3 - 1 = 2
+is startPointer < endPointer, 1 < 2, true, start 1st outer loop
+is array[startPointer] < pivot && startPointer < endPointer, array[1] < 2 && 1 < 2, 3 < 2 && 1 < 2, false, loop does not start
+is array[endPointer] >= pivot && startPointer < endPointer, array[2] >= 2 && 1 < 2, 2 >= 2 && 1 < 2, true, start 1st inner loop
+endPointer decrement by 1, endPointer = 1
+array[1] >= 2 && 1 < 1, 3 >= 2 && 1 < 1, false, end inner loop
+is startPointer === endPointer, 1 === 1, end outer loop
+swap array[startPointer] with array[end - 1], array[1] with array[2], 3 with 2
+[1, 3, 2, 4, 5] -> [1, 2, 3, 4, 5]
+
+call 3rd left recursion
+start = 1
+end = startPointer = 1
+end - start = 1 - 1 = 0 <= 1, true, return undefined
+
+call 3rd right recursion
+start = startPointer + 1 = 1 + 1 = 2
+end = 3
+end - start = 3 - 2 = 1 <= 1, true, return undefined
+
+call 1st right recursion
+start = startPointer + 1 = 3 + 1 = 4
+end = 5
+end - start = 5 - 4 = 1 <= 1, true, return undefined
+
+output: [1, 2, 3, 4, 5]
+```
 ### time space complexity
 - The time complexity of quick sort is a bit complicated
 - On average, where the list is divided somewhere near the center each time, the time complexity is `O(nlog(n))`
