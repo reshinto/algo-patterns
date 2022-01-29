@@ -713,6 +713,38 @@ output: [1, 2, 3, 4, 5]
 ![quickSort](../images/quickSort.gif)
 
 ### JavaScript
+```javascript
+function sortListInterval(unsortedList, start, end) {
+  if (end - start <= 1) return undefined;
+  const pivot = unsortedList[end - 1];
+  let startPointer = start;
+  let endPointer = end - 1;
+  while (startPointer < endPointer) {
+    while (unsortedList[startPointer] < pivot && startPointer < endPointer) {
+      startPointer++;
+    }
+    while (unsortedList[endPointer] >= pivot && startPointer < endPointer) {
+      endPointer--;
+    }
+    if (startPointer === endPointer) {
+      break;
+    }
+    [unsortedList[startPointer], unsortedList[endPointer]] = [unsortedList[endPointer], unsortedList[startPointer]];
+  }
+  [unsortedList[startPointer], unsortedList[end - 1]] = [unsortedList[end - 1], unsortedList[startPointer]];
+  sortListInterval(unsortedList, start, startPointer);
+  sortListInterval(unsortedList, startPointer + 1, end);
+}
+
+function sortList(unsortedList) {
+  sortListInterval(unsortedList, 0, unsortedList.length);
+  return unsortedList;
+}
+
+const test = [5, 3, 1, 2, 4];
+const result = sortList(test)
+console.log(test)
+```
 ### time space complexity
 - The time complexity of quick sort is a bit complicated
 - On average, where the list is divided somewhere near the center each time, the time complexity is `O(nlog(n))`
