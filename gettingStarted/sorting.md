@@ -692,3 +692,33 @@ output: [1, 2, 3, 4, 5]
     - it is merged a number of times equal to the number of divisions to make to divide the list to a size of one
       - which is `O(log(n))` times
 ## Quick Sort
+- idea of quick sort is We select an arbitrary element in the list (known as the "pivot")
+  - we swap the elements in the list into two sides
+    - a side where all the elements are smaller than the pivot
+    - a side where all the elements are larger or equal to the pivot
+  - After grouping them this way, we swap the pivot with the first element of the side that is larger or equal to the pivot
+  - This way, each element to the left of the pivot is smaller than the pivot
+    - and each element on the right is larger or equal to pivot
+   - Then we just need to sort the left interval and the right interval (using the same method), then the list would be sorted
+- how would it grouped together?
+  - for the interval that we are sorting, we have a pointer point before the start and at the end (including the pivot)
+  - For each swap, we move the start pointer until we find an element >= to the pivot (after the initial index)
+    - and move the end pointer until we find an element <= to the pivot (before the initial index)
+  - Then we can swap those two elements and restart the process
+  - If those two pointers meet, we stop and then we can swap the pivot and the meeting point
+- algorithm is not stable, as each swap skips a lot of values
+- It sort the array in-place, as it does not require additional data structures
+  - Note that this does not mean this algorithm happens in constant space
+
+![quickSort](../images/quickSort.gif)
+
+### JavaScript
+### time space complexity
+- The time complexity of quick sort is a bit complicated
+- On average, where the list is divided somewhere near the center each time, the time complexity is `O(nlog(n))`
+- However, in the worst case scenario, each interval to sort is one less than the current interval
+  - which would make the time complexity `O(n^2)`
+    - This depends heavily on which pivot point you chooses
+      - if you choose an end point as your pivot and the list is already sorted, it will reach this time complexity
+      - Otherwise, the chance of this happening is very low
+- uses recursion as its core logic, and the minimum recursion layers is equal to `log(n)`
