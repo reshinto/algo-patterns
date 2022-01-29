@@ -17,6 +17,8 @@
   - and inserting from the unsorted pile into the sorted pile in the correct position
 - It is a `stable algorithm` because later elements will not swap with earlier elements unless the later element is smaller
 - it is an `in-place algorithm` because no additional data structure is used to store intermediate values
+- good for sorting lists that are almost sorted
+  - number of swaps required to insert an item when the list is almost sorted is close to `O(1)`
 
 ![insertionSort](../images/insertionSort.gif)
 
@@ -86,6 +88,7 @@ output: [1, 2, 3, 4, 5]
   - The element is now part of the sorted pile
 - `not a stable algorithm` because an earlier element can jump after an element of the same value during a swap
 - `algorithm is in-place` as it only needs additional memory to store the index to the minimum element
+- even if the list is almost sorted, we still need to go through the entire process each cycle
 
 ![selectionSort](../images/selectionSort.gif)
 
@@ -174,6 +177,8 @@ output: [1, 2, 3, 4, 5]
     - and the list is guaranteed to be sorted within n passes
 - It is a stable algorithm because a swap cannot cause an element to move past another one with the same value
   - and it is in-place because no additional data structure is used
+- good for sorting lists that are almost sorted
+  - after close to `O(1)` bubbles we can detect that the list is already sorted and stop the sorting
 
 ![bubbleSort](../images/bubbleSort.gif)
 
@@ -258,6 +263,11 @@ output: [1, 2, 3, 4, 5]
 - Note that the base case, where only one element exists in the list is stable
   - because there are no 2 elements of the same size, so merge sort is stable
 - merge sort is not in-place because of the usage of additional arrays
+- merge sort is stable, and always have a time complexity of `O(nlog(n))`
+  - so it is more reliable compared to quick sort
+- requires way more extra memory than quick sort, and requires memory management of arrays, so quick sort is often preferred if stability is not important
+- it is a classic `Divide and Conquer` algorithm
+  - has applications in real-world interview questions such as `Count of Smaller Numbers after Self`
 
 ![mergeSort](../images/mergeSort.gif)
 
@@ -709,6 +719,14 @@ output: [1, 2, 3, 4, 5]
 - algorithm is not stable, as each swap skips a lot of values
 - It sort the array in-place, as it does not require additional data structures
   - Note that this does not mean this algorithm happens in constant space
+- merge sort is stable, and always have a time complexity of `O(nlog(n))`
+  - so it is more reliable compared to quick sort
+- requires way more extra memory than quick sort, and requires memory management of arrays, so quick sort is often preferred if stability is not important
+- A problem with the following implementation of quick sort is that when the list is almost sorted, it will take close to `O(n^2)` time
+  - In other implementations, however, the pivot is selected as the midpoint of the list, so it can help mitigate this problem
+    - however, you would need to remember that the index to the pivot moves with the pivot when swapping
+- unlikely you will be asked to code it up at an interview
+  - but the idea of moving things around a pivot can be seen in `Two Pointers` interview questions
 
 ![quickSort](../images/quickSort.gif)
 
@@ -842,3 +860,42 @@ output: [1, 2, 3, 4, 5]
       - if you choose an end point as your pivot and the list is already sorted, it will reach this time complexity
       - Otherwise, the chance of this happening is very low
 - uses recursion as its core logic, and the minimum recursion layers is equal to `log(n)`
+## Heap sort
+- utilizes a heap and pull the elements from the heap and order them
+- is unstable, and can be done in-place
+### time space complexity
+- It has a time complexity of `O(nlog(n))`
+## Tree sort
+- utilizes a binary search tree that is built from the list, so we can iterate through it
+- can be stable, but is not in-place
+### time space complexity
+- It has a time complexity of `O(nlog(n))` (if balanced)
+## Bucket sort
+- can use if there are a lot of integers to be sorted, but the range of these integers are very small
+- uses an array, with the index being the entries from the list and the value being the number of times a number has appeared in the list
+### time space complexity
+- has a low time complexity of `O(n)`
+- has a space complexity of `O(m)`, where m is the range of the integers
+## Built-in sorting
+- most modern programming language have a built-in sorting function
+- in an interview, it is sufficient to just use these built-in ones
+### Python
+```python
+unsorted = [5, 3, 1, 2, 4]
+
+result = sorted(unsorted)
+print(unsorted)  # [5, 3, 1, 2, 4]
+print(result)  # [1, 2, 3, 4, 5]
+
+unsorted1 = [5, 3, 1, 2, 4]
+unsorted1.sort()
+print(unsorted1)  # [1, 2, 3, 4, 5]
+```
+### Javascript
+```javascript
+const unsorted = [5, 3, 1, 2, 4];
+
+const result = unsorted.sort();
+console.log(unsorted);  // [1, 2, 3, 4, 5]
+console.log(result);  // [1, 2, 3, 4, 5]
+```
