@@ -212,7 +212,7 @@ loop 4 times
 5 > 2, swap 5 with 2 = [3, 1, 2, 5, 4], set swapped to true
 4th loop is input[j] > input[j+1] = true
 5 > 4, swap 5 with 4 = [3, 1, 2, 4, 5], set swapped to true, end inner loop
-since swapped is true, move to next outter loop
+since swapped is true, move to next outer loop
 
 i=3
 set swapped to false
@@ -223,7 +223,7 @@ loop 3 times
 3 > 2, swap 3 with 2 = [1, 2, 3, 4, 5], set swapped to true
 3rd loop is input[j] > input[j+1] = false
 3 < 4, swap 3 with 2 = [1, 2, 3, 4, 5], end inner loop
-since swapped is true, move to next outter loop
+since swapped is true, move to next outer loop
 
 i=2
 set swapped to false
@@ -232,7 +232,7 @@ loop 2 times
 1 < 2, no swap, move to next inner loop
 2nd loop is input[j] > input[j+1] = false
 2 < 3, no swap, end inner loop
-since swapped is false, end outter loop and return sorted array
+since swapped is false, end outer loop and return sorted array
 
 output: [1, 2, 3, 4, 5]
 ```
@@ -505,7 +505,7 @@ input: [5, 3, 1, 2, 4]
 
 create a new input array copy sorted = [5, 3, 1, 2, 4] and a new array buffer = [, , , , ] for sorting
 n = 5
-start outter loop, 1st loop, size = 1, 1 < n
+start outer loop, 1st loop, size = 1, 1 < n
 start inner loop, 1st loop, leftStart = 0, 0 < n
 get the 2 sub arrays
 left = 0, since left + size < n, 0 + 1 < 5, right = 1
@@ -578,7 +578,7 @@ swap buffer with sorted array
 new sorted array = [3, 5, 1, 2, 4], new buffer array values [5, 3, 1, 2, 4] are not important
 
 
-2nd outter loop, size = 1 * 2 = 2, 2 < n
+2nd outer loop, size = 1 * 2 = 2, 2 < n
 start inner loop, 1st loop, leftStart = 0, 0 < n
 get the 2 sub arrays
 left = 0
@@ -639,7 +639,7 @@ swap buffer with sorted array
 new sorted array = [1, 2, 3, 5, 4], new buffer array values [3, 5, 1, 2, 4] are not important
 
 
-3rd outter loop, size = 2 * 2 = 4, 4 < n
+3rd outer loop, size = 2 * 2 = 4, 4 < n
 start inner loop, 1st loop, leftStart = 0, 0 < n
 get the 2 sub arrays
 left = 0
@@ -682,7 +682,7 @@ since leftStart = 4 + 2 * 2 = 8, 8 > n, inner loop breaks
 swap buffer with sorted array
 new sorted array = [1, 2, 3, 4, 5], new buffer array values [1, 2, 3, 5, 4] are not important
 
-3rd outter loop, size = 4 * 2 = 8, 8 > n, outter loop breaks
+3rd outer loop, size = 4 * 2 = 8, 8 > n, outer loop breaks
 
 output: [1, 2, 3, 4, 5]
 ```
