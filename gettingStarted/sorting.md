@@ -443,7 +443,248 @@ return [1, 2, 3, 4, 5]
 output: [1, 2, 3, 4, 5]
 ```
 #### Iterative
+- also known as bottom up merge sort
+  - we treat each element of the array as n sub arrays
+  - then iteratively merge these sub array back and forth between two buffers
 ```javascript
+function merge(left, right, leftLimit, rightLimit, sorted, buffer) {
+  let i = left;
+
+  //Compare the two sub arrays and merge them in the sorted order
+  while (left < leftLimit && right < rightLimit) {
+    if (sorted[left] <= sorted[right]) {
+      buffer[i++] = sorted[left++];
+    } else {
+      buffer[i++] = sorted[right++];
+    }
+  }
+
+  //If there are elements in the left sub arrray then add it to the result
+  while (left < leftLimit) {
+    buffer[i++] = sorted[left++];
+  }
+
+  //If there are elements in the right sub array then add it to the result
+  while (right < rightLimit) {
+    buffer[i++] = sorted[right++];
+  }
+}
+
+function sortList(unsortedList) {
+  //Create two arrays for sorting
+  let sorted = [...unsortedList];
+  let n = sorted.length;
+  let buffer = new Array(n);
+
+  for (let size = 1; size < n; size *= 2) {
+    for (let leftStart = 0; leftStart < n; leftStart += 2*size) {
+
+      //Get the two sub arrays
+      let left = leftStart;
+      let right = Math.min(left + size, n);
+      let leftLimit = right;
+      let rightLimit = Math.min(right + size, n);
+
+      //Merge the sub arrays
+      merge(left, right, leftLimit, rightLimit, sorted, buffer);
+    }
+
+    //Swap the sorted sub array and merge them
+    [sorted, buffer] = [buffer, sorted];
+  }
+
+  return sorted;
+}
+
+const test = [5, 3, 1, 2, 4];
+const result = sortList(test)
+console.log(result)
+```
+```
+input: [5, 3, 1, 2, 4]
+
+create a new input array copy sorted = [5, 3, 1, 2, 4] and a new array buffer = [, , , , ] for sorting
+n = 5
+start outter loop, 1st loop, size = 1, 1 < n
+start inner loop, 1st loop, leftStart = 0, 0 < n
+get the 2 sub arrays
+left = 0, since left + size < n, 0 + 1 < 5, right = 1
+leftLimit = 1, since right + size < n, 1 + 1 < 5, rightLimit = 2
+merge sub arrays [5], [3]
+
+i = left = 0
+is left < leftLimit and right < rightLimit, 0 < 1 and 1 < 2, true
+start compare 2 sub arrays and merge them loop
+is sorted[left] > sorted[right], 5 > 3, true
+set buffer[i] = sorted[right], buffer[0] = sorted[1] = 3, increment i and right by 1, i = 1, right = 2
+buffer [3, , , , ]
+since right === rightLimit, loop breaks
+
+check if elements in left sub array exist then add to buffer
+is left < leftLimit, 0 < 1, true
+buffer[i] = sorted[left], buffer[1] = sorted[1], buffer[1] = 5, increment i and left by 1, i = 2, left = 1
+buffer [3, 5, , , ]
+since left === leftLimit, 1 === 1, loop breaks
+
+check if elements in right sub array exists then add to buffer
+is right < rightLimit, 2 === 2, false, loop does not start
+
+
+2nd inner loop, leftStart = 0 + 2 * 1 = 2, 2 < n
+get the 2 sub arrays
+left = 2, since left + size < n, 2 + 1 < 5, right = 3
+leftLimit = 3, since right + size < n, 3 + 1 < 5, rightLimit = 4
+merge sub arrays [1], [2]
+
+i = left = 2
+is left < leftLimit and right < rightLimit, 2 < 3 and 3 < 4, true
+start compare 2 sub arrays and merge them loop
+is sorted[left] < sorted[right], 1 < 2, true
+set buffer[i] = sorted[left], buffer[2] = sorted[2] = 1, increment i and left by 1, i = 3, left = 3
+buffer [3, 5, 1, , ]
+since left === leftLimit, loop breaks
+
+check if elements in left sub array exists then add to buffer
+is left < leftLimit, 3 === 3, false, loop does not start
+
+check if elements in right sub array exist then add to buffer
+is right < rightLimit, 3 < 4, true
+buffer[i] = sorted[right], buffer[3] = sorted[3], buffer[3] = 2, increment i and right by 1, i = 4, right = 4
+buffer [3, 5, 1, 2, ]
+since right === rightLimit, 4 === 4, loop breaks
+
+
+3rd inner loop, leftStart = 2 + 2 * 1 = 4, 4 < n
+get the 2 sub arrays
+left = 4, since left + size === n, 4 + 1 === 5, right = 5
+leftLimit = 5, since right + size > n, 5 + 1 > 5, rightLimit = 5
+merge sub arrays [4], []
+
+i = left = 4
+is left < leftLimit and right < rightLimit, 4 < 5 and 5 < 5, false, loop does not start
+
+check if elements in left sub array exist then add to buffer
+is left < leftLimit, 4 < 5, true
+buffer[i] = sorted[left], buffer[4] = sorted[4], buffer[4] = 4, increment i and left by 1, i = 5, left = 5
+buffer [3, 5, 1, 2, 4]
+since left === leftLimit, 5 === 5, loop breaks
+
+check if elements in right sub array exists then add to buffer
+is right < rightLimit, 5 === 5, false, loop does not start
+
+
+since leftStart = 4 + 2 * 1 = 6, 6 > n, inner loop breaks
+swap buffer with sorted array
+new sorted array = [3, 5, 1, 2, 4], new buffer array values [5, 3, 1, 2, 4] are not important
+
+
+2nd outter loop, size = 1 * 2 = 2, 2 < n
+start inner loop, 1st loop, leftStart = 0, 0 < n
+get the 2 sub arrays
+left = 0
+right = 2, since left + size < n, 0 + 2 < 5
+leftLimit = 2
+rightLimit = 4, since right + size < n, 2 + 2 = 4 < 5
+merge sub arrays [3, 5], [1, 2]
+
+i = left = 0
+is left < leftLimit and right < rightLimit, 0 < 2 and 2 < 4, true
+start compare 2 sub arrays and merge them loop
+is sorted[left] > sorted[right], 3 > 1, true
+set buffer[i] = sorted[right], buffer[0] = sorted[2] = 1, increment i and right by 1, i = 1, right = 3
+buffer [1, 3, 1, 2, 4]
+since right < rightLimit, loop continues
+is sorted[left] > sorted[right], 3 > 2, true
+set buffer[i] = sorted[right], buffer[1] = sorted[3] = 2, increment i and right by 1, i = 2, right = 4
+buffer [1, 2, 1, 2, 4]
+since right === rightLimit, loop breaks
+
+check if elements in left sub array exist then add to buffer
+is left < leftLimit, 0 < 2, true
+buffer[i] = sorted[left], buffer[2] = sorted[0], buffer[2] = 3, increment i and left by 1, i = 3, left = 1
+buffer [1, 2, 3, 2, 4]
+since left < leftLimit, 1 < 2, loop continues
+is left < leftLimit, 1 < 2, true
+buffer[i] = sorted[left], buffer[3] = sorted[1], buffer[3] = 5, increment i and left by 1, i = 4, left = 2
+buffer [1, 2, 3, 5, 4]
+since left === leftLimit, loop breaks
+
+check if elements in right sub array exists then add to buffer
+is right < rightLimit, 4 === 4, false, loop does not start
+
+
+2nd inner loop, leftStart = 0 + 2 * 2, 4 < n
+get the 2 sub arrays
+left = 4
+right = 5, since left + size < n, 4 + 2 = 6 > 5
+leftLimit = 5
+rightLimit = 5, since right + size < n, 5 + 2 = 7 > 5
+merge sub arrays [4], []
+
+i = left = 4
+is left < leftLimit and right < rightLimit, 4 < 5 and 5 < 5, false, loop does not start
+
+check if elements in left sub array exist then add to buffer
+is left < leftLimit, 4 < 5, true
+buffer[i] = sorted[left], buffer[4] = sorted[4], buffer[4] = 4, increment i and left by 1, i = 5, left = 5
+buffer [1, 2, 3, 5, 4]
+since left === leftLimit, 5 === 5, loop breaks
+
+check if elements in right sub array exists then add to buffer
+is right < rightLimit, 5 === 5, false, loop does not start
+
+
+since leftStart = 4 + 2 * 2 = 8, 8 > n, inner loop breaks
+swap buffer with sorted array
+new sorted array = [1, 2, 3, 5, 4], new buffer array values [3, 5, 1, 2, 4] are not important
+
+
+3rd outter loop, size = 2 * 2 = 4, 4 < n
+start inner loop, 1st loop, leftStart = 0, 0 < n
+get the 2 sub arrays
+left = 0
+right = 4, since left + size < n, 0 + 4 < 5
+leftLimit = 4
+rightLimit = 5, since right + size < n, 4 + 4 = 8 > 5
+merge sub arrays [1, 2, 3, 5], [4]
+
+i = left = 0
+is left < leftLimit and right < rightLimit, 0 < 4 and 4 < 5, true
+start compare 2 sub arrays and merge them loop
+is sorted[left] < sorted[right], 1 < 4, true
+set buffer[i] = sorted[left], buffer[0] = sorted[0] = 1, increment i and left by 1, i = 1, left = 1
+buffer [1, 5, 1, 2, 4]
+since left < leftLimit, loop continues
+is sorted[left] < sorted[right], 2 < 4, true
+set buffer[i] = sorted[left], buffer[1] = sorted[1] = 2, increment i and left by 1, i = 2, left = 2
+buffer [1, 2, 1, 2, 4]
+since left < leftLimit, loop continues
+is sorted[left] < sorted[right], 3 < 4, true
+set buffer[i] = sorted[left], buffer[2] = sorted[2] = 3, increment i and left by 1, i = 3, left = 3
+buffer [1, 2, 3, 2, 4]
+since left < leftLimit, loop continues
+is sorted[left] > sorted[right], 5 < 4, true
+set buffer[i] = sorted[right], buffer[3] = sorted[4] = 4, increment i and right by 1, i = 4, right = 5
+buffer [1, 2, 3, 4, 4]
+since right === rightLimit, 5 === 5, loop breaks
+
+check if elements in left sub array exist then add to buffer
+is left < leftLimit, 3 < 4, true
+buffer[i] = sorted[left], buffer[4] = sorted[3], buffer[4] = 5, increment i and left by 1, i = 5, left = 4
+buffer [1, 2, 3, 4, 5]
+since left === leftLimit, 4 === 4, loop breaks
+
+check if elements in right sub array exists then add to buffer
+is right < rightLimit, 5 === 5, false, loop does not start
+
+
+since leftStart = 4 + 2 * 2 = 8, 8 > n, inner loop breaks
+swap buffer with sorted array
+new sorted array = [1, 2, 3, 4, 5], new buffer array values [1, 2, 3, 5, 4] are not important
+
+3rd outter loop, size = 4 * 2 = 8, 8 > n, outter loop breaks
+
+output: [1, 2, 3, 4, 5]
 ```
 ### time space complexity
 - overall time complexity is `O(nlog(n))`
