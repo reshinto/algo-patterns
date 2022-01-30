@@ -1,7 +1,8 @@
 # Binary Search pattern
 - is an efficient array search algorithm
 - It works by narrowing down the search range by half each time
-## Example
+## Vanilla Binary Search pattern
+### Example
 ```
 Given a sorted array of integers and an integer called target,
 find the element that equals to the target and return its index.
@@ -64,7 +65,7 @@ function binarySearch(arr, target) {
 const arr = [1, 3, 6, 8, 9, 10];
 console.log(binarySearch(arr, 1));  // 0
 ```
-## Finding Boundary with Binary Search
+## Finding Boundary with Binary Search pattern
 - This problem is a major key in solving future binary search-related problems
 - many problems boil down to finding the boundary in a boolean array
 ### Example
