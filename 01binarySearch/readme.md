@@ -61,6 +61,70 @@ function binarySearch(arr, target) {
   return -1;  // if we get here we didn't hit above return so we didn't find target
 }
 
-const arr = [1, 3, 6, 8, 9, 10]
-console.log(binarySearch(arr, 1))
+const arr = [1, 3, 6, 8, 9, 10];
+console.log(binarySearch(arr, 1));  // 0
+```
+## Finding Boundary with Binary Search
+- This problem is a major key in solving future binary search-related problems
+- many problems boil down to finding the boundary in a boolean array
+### Example
+```
+An array of boolean values is divided into two sections;
+the left section consists of all false and the right section consists of all true
+Find the boundary of the right section, i.e. the index of the first true element
+If there is no true element, return -1
+
+Input: arr = [false, false, true, true, true]
+
+Output: 2
+
+Explanation: first true's index is 2
+```
+- The binary decision we have to make when we look at an element is
+  1. if the element is false, we discard everything to the left and the current element itself
+  2. if the element is true, the current element could be the first true although there may be other true to the left
+      - We discard everything to the right, but what about the current element?
+- We can either keep the current element in the range or record it somewhere and then discard it
+  - this example uses the latter approach
+    - We keep a variable boundary_index that represents the leftmost true's index currently recorded
+      - If the current element is true, then we update boundary_index with its index
+        - discard everything to the right including the current element itself since its index has been recorded by the variable
+    - Time Complexity: `O(log(n))`
+  - alternative approach
+    - keep the current element in the search range instead of discarding it
+      - i.e. if arr[mid]: right = mid instead of right = mid - 1
+    - However, doing this without modifying the while condition will result in an infinite loop
+      - This is because when left == right, right = mid will not modify right and thus, not shrink search range and we will be stuck in the while loop forever
+      - To make this work we have to remove the equality in the while condition
+      - In addition, a while loop without equality will miss the single-element edge case so we have to add an additional check after the loop to handle this case
+    - Overall, we have to make three modifications to the vanilla binary search to make it work
+    - Side note: how to not get stuck in an infinite loop
+      - make progress in each step
+      - have an exit strategy
+
+![findingBoundaryBinarySearch](../images/findingBoundaryBinarySearch.gif)
+
+### Implementation
+- good thing with this approach is that we don't have to modify the while loop logic in the vanilla binary search from the last module, besides introducing a variable
+### Javascript
+```javascript
+function findBoundary(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+  let boundary_index = -1;
+
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid]) {
+      boundary_index = mid;
+      right = mid - 1;
+    } else {
+      left = mid + 1;
+    }
+  }
+  return boundary_index;
+}
+
+const arr = [false, false, false, true, true, true];
+console.log(findBoundary(arr));  // 3
 ```
