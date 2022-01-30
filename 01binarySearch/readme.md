@@ -107,6 +107,7 @@ Explanation: first true's index is 2
 ### Implementation
 - good thing with this approach is that we don't have to modify the while loop logic in the vanilla binary search from the last module, besides introducing a variable
 ### Javascript
+- record it somewhere and then discard it solution
 ```javascript
 function findBoundary(arr) {
   let left = 0;
@@ -120,6 +121,36 @@ function findBoundary(arr) {
       right = mid - 1;
     } else {
       left = mid + 1;
+    }
+  }
+  return boundary_index;
+}
+
+const arr = [false, false, false, true, true, true];
+console.log(findBoundary(arr));  // 3
+```
+- keep the current element in the search range instead of discarding it solution
+```javascript
+function findBoundary(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+  let boundary_index = -1;
+
+  while (left < right) {
+    let mid = Math.floor((left + right) / 2);
+    if (arr[mid]) {
+      boundary_index = mid;
+      right = mid;
+    } else {
+      left = mid + 1;
+    }
+    if (left === right) {
+      mid = Math.floor((left + right) / 2);
+      if (arr[mid]) {
+        boundary_index = mid;
+      } else {
+        boundary_index = -1;
+      }
     }
   }
   return boundary_index;
