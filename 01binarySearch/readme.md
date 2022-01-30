@@ -18,6 +18,9 @@ If the element is not found, return -1.
     - Instead of picking a random element, we always pick the middle element in the current search range
       - This way we can discard half of the options and shrink the search range by half each time
       - This gives us `O(log(N))` runtime
+
+![binarySearch](../images/binarySearch.gif)
+
 ## Implementation
 - search range is represented by the `left` and `right` indices that start from both ends of the array and move towards each other as we search
 - When we move the index, we discard elements and shrink the search range
