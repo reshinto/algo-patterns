@@ -1,4 +1,4 @@
-# Depth First Search pattern
+# Depth First Search
 ## Recursion pattern
 - one of the most important concepts in computer science
 - it is the process of a function calling itself
@@ -55,4 +55,78 @@ function factorialStack(n) {
 }
 
 console.log(factorialStack(5));
+```
+## Depth First Search pattern
+- DFS is a bold search
+- We go as deep as we can to look for a value, and when there is nothing new to discover, we retrace our steps to find something new
+- `pre-order traversal` of a tree is DFS
+- it introduces 2 other concepts
+  - backtracking: the action of retracing steps
+    - Backtracking and DFS are similar concept and the same thing since in DFS you always "backtrack" after exploring a deeper node
+    - to make a distinction, backtracking is the concept of retracing and DFS is the algorithm that implements it
+    - backtracking is often mentioned and associated with combinatorial search problems
+  - divide and conquer
+    - splitting into subproblems of the same type (search in left and right children) until they are simple enough to be solved directly (null nodes or found target) and combine the results from these subproblems (return non-null node)
+      - two recursive calls `dfs(root.left)` and `dfs(root.right)`, and return based on results from the recursive calls
+### When to use DFS
+#### Tree
+- DFS is essentially pre-order tree traversal
+  - Traverse and find/create/modify/delete node
+  - Traverse with return value (finding max subtree, detect balanced tree)
+#### Combinatorial problems
+- DFS / backtracking and combinatorial problems are a match made in heaven
+- combinatorial search problems boil down to searching in trees
+  - How many ways are there to arrange something
+  - Find all possible combinations of ...
+  - Find all solutions to a puzzle
+#### Graph
+- Trees are special graphs that have no cycle
+- We can still use DFS in graphs with cycles
+- We just have to record the nodes we have visited and avoiding re-visiting them and going into an infinite loop
+  - Find a path from point A to B
+  - Find connected components
+  - Detect cycles
+
+![dfs](../images/dfs.gif)
+
+### Javascript
+```javascript
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function dfs(root, target) {
+    if (!root) return null;
+    if (root.val == target) return root;
+    
+    left = dfs(root.left, target);
+    if (left) return left;  // return non-null return value from the recursive calls
+    
+    // at this point, we know left is null, and right could be null or non-null
+    // we return right child's recursive call result directly because
+    // - if it's non-null we should return it
+    // - if it's null, then both left and right are null, we want to return null
+    right = dfs(root.right, target);
+    return right
+}
+
+const one = new TreeNode(1)
+const two = new TreeNode(2)
+const three = new TreeNode(3)
+const four = new TreeNode(4)
+const five = new TreeNode(5)
+const six = new TreeNode(6)
+
+one.left = two
+one.right = six
+two.left = three
+two.right = four
+three.right = five
+
+const node = dfs(one, 4)
+console.log(node.val)
 ```
