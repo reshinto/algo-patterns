@@ -103,3 +103,35 @@ two.children = [three];
 const result = ternaryTreePaths(one);
 console.log(result);
 ```
+## Memoization
+- It means saving the previous function call result in a dictionary and reading from it when we do the exact same call
+- Memoization is particularly useful for combinatorial problems that have large repeated state-space tree branches
+### without memoization results in a lot of repeated computations
+
+![withoutMemoization](../images/withoutMemoization.gif)
+
+#### Javascript
+```javascript
+function fib(n) {
+  if (n === 0 || n === 1) {
+    return n;
+  }
+  return fib(n - 1) + fib(n - 2);
+}
+```
+### with memoization
+- The solution is saving previous results in a map of function argument to results (the "memo")
+  - and checking it and returning previous results if it has been done before
+  - Otherwise, we carry out the computation and save the results in the map
+#### Javascript
+```javascript
+function fib(n, memo = {}) {
+  // check in memo, if found, retrieve and return right away
+  if (n in memo) return memo[n];
+  if (n === 0 || n === 1) return n;
+  const res = fib(n - 1, memo) + fib(n - 2, memo);
+  // save result to memo before returning
+  memo[n] = res;
+  return res;
+}
+```
