@@ -1,5 +1,5 @@
-# Backtracking pattern
-## Combinatorial Search
+# Backtracking
+## Combinatorial Search pattern
 - Combinatorial search problems involve finding grouping and assignments of objects that satisfy certain conditions
 - Finding all permutations/subsets, solving sudoku, and 8-queens are classic combinatorial problems
 ### Permutations
