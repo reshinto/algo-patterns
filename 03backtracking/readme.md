@@ -103,7 +103,7 @@ two.children = [three];
 const result = ternaryTreePaths(one);
 console.log(result);
 ```
-## Memoization
+## Memoization pattern
 - It means saving the previous function call result in a dictionary and reading from it when we do the exact same call
 - Memoization is particularly useful for combinatorial problems that have large repeated state-space tree branches
 ### without memoization results in a lot of repeated computations
@@ -135,3 +135,9 @@ function fib(n, memo = {}) {
   return res;
 }
 ```
+## Pruning pattern
+- cut branches off the space-state tree
+- The fewer branches, the faster the algorithm
+- When do we want to prune a branch? When it's clear that going into that branch would not yield a final state
+## Dedup pattern
+### Combination Sum
