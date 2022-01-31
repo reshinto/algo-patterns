@@ -1,5 +1,9 @@
 # Backtracking pattern
-## DFS with states
+## Combinatorial Search
+### DFS with states
+#### Ternary Tree Paths
+- each node of the tree has at most three children, find all root-to-leaf paths
+- use path to keep track of the nodes we have visited to reach the current node and use it to construct our solution when we reach leaf nodes
 #### Javascript
 ```javascript
 class Node {
@@ -8,12 +12,7 @@ class Node {
     this.children = children;
   }
 }
-```
-### Ternary Tree Paths
-- each node of the tree has at most three children, find all root-to-leaf paths
-- use path to keep track of the nodes we have visited to reach the current node and use it to construct our solution when we reach leaf nodes
-#### Javascript
-```javascript
+
 function dfs(root, path, res) {
   // exit condition, reached leaf node, append paths to results
   if (root.children.length === 0) {
