@@ -38,7 +38,7 @@
     - A small test case that's big enough to reach one solution (leaf node)
     - after drawing the tree, simply traverse the tree depth-first
 3. DFS / backtrack on the state-space tree
-    - apply the following backtracking template
+    - apply the following `backtracking template`
     ```javascript
     function dfs(node, state):
       if state is a solution:
