@@ -68,24 +68,6 @@ console.log(factorialStack(5));
   - divide and conquer
     - splitting into subproblems of the same type (search in left and right children) until they are simple enough to be solved directly (null nodes or found target) and combine the results from these subproblems (return non-null node)
       - two recursive calls `dfs(root.left)` and `dfs(root.right)`, and return based on results from the recursive calls
-### When to use DFS
-#### Tree
-- DFS is essentially pre-order tree traversal
-  - Traverse and find/create/modify/delete node
-  - Traverse with return value (finding max subtree, detect balanced tree)
-#### Combinatorial problems
-- DFS / backtracking and combinatorial problems are a match made in heaven
-- combinatorial search problems boil down to searching in trees
-  - How many ways are there to arrange something
-  - Find all possible combinations of ...
-  - Find all solutions to a puzzle
-#### Graph
-- Trees are special graphs that have no cycle
-- We can still use DFS in graphs with cycles
-- We just have to record the nodes we have visited and avoiding re-visiting them and going into an infinite loop
-  - Find a path from point A to B
-  - Find connected components
-  - Detect cycles
 
 ![dfs](../images/dfs.gif)
 
@@ -130,3 +112,21 @@ three.right = five
 const node = dfs(one, 4)
 console.log(node.val)
 ```
+### When to use DFS
+#### Tree
+- DFS is essentially pre-order tree traversal
+  - Traverse and find/create/modify/delete node
+  - Traverse with return value (finding max subtree, detect balanced tree)
+#### Combinatorial problems
+- DFS / backtracking and combinatorial problems are a match made in heaven
+- combinatorial search problems boil down to searching in trees
+  - How many ways are there to arrange something
+  - Find all possible combinations of ...
+  - Find all solutions to a puzzle
+#### Graph
+- Trees are special graphs that have no cycle
+- We can still use DFS in graphs with cycles
+- We just have to record the nodes we have visited and avoiding re-visiting them and going into an infinite loop
+  - Find a path from point A to B
+  - Find connected components
+  - Detect cycles
