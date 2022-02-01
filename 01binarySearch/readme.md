@@ -85,7 +85,7 @@ Explanation: first true's index is 2
   1. if the element is false, we discard everything to the left and the current element itself
   2. if the element is true, the current element could be the first true although there may be other true to the left
       - We discard everything to the right, but what about the current element?
-- We can either keep the current element in the range or record it somewhere and then discard it
+- We can either `keep the current element in the range` or `record it somewhere and then discard it`
   - this example uses the latter approach
     - We keep a variable boundary_index that represents the leftmost true's index currently recorded
       - If the current element is true, then we update boundary_index with its index
