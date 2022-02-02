@@ -66,3 +66,5 @@ function findMinRotated(arr) {
   - The minimum element is at the boundary between the two sections.
 - We can apply a filter of < the last element and get the boolean array that characterizes the two sections
 - Now the problem is yet again reduced to finding the first true element in a boolean array
+- And we already know how to do this from `Find Boundary`
+- Time Complexity: `O(log(n))`
