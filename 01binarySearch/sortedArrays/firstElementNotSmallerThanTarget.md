@@ -41,4 +41,7 @@ function firstNotSmaller(arr, target) {
 ```
 ### Explanation
 - The problem is equivalent to finding the boundary of elements < 3 and elements >=3
+- Imagine if we apply a filter of `arr[i] < target`
+- Now the problem is reduced to finding the first true element in a boolean array
+- And we already know how to do this from `Find Boundary`
 - Time Complexity: `O(log(n))`
