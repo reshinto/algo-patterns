@@ -34,4 +34,7 @@ function squareRoot(n) {
 ```
 ### Explanation
 - The problem is equivalent to finding the boundary of elements < n and elements >= n
+- Imagine we apply a filter of `arr[i] ^ 2 = n`
+- Now the problem is reduced to finding the last true element in a boolean array
+- And we already know how to do this from `Find Boundary`
 - Time Complexity: `O(log(n))`
