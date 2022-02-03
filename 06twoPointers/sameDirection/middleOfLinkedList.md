@@ -44,7 +44,7 @@ function middleOfLinkedList(nodes) {
   - Technically `O(n/2)` but constants are cut out from the time complexity and so we are left with just `O(n)`
 
 
-![middleLinkedList](../images/middleLinkedList.gif)
+![middleLinkedList](../../images/middleLinkedList.gif)
 
 - We have to check the existence of fast and fast.next in the while loop condition
 - We have to check fast because if list length is odd (illustrated above)
@@ -52,4 +52,4 @@ function middleOfLinkedList(nodes) {
 - And if list length is even (illustrated below)
   - the fast pointer would land on null (Node 6's next)
 
-![middleLinkedListOdd](../images/middleLinkedListOdd.gif)
+![middleLinkedListOdd](../../images/middleLinkedListOdd.gif)
