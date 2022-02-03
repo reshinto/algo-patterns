@@ -14,6 +14,7 @@
 ### Same Directions
 - questions have two pointers that move in the same direction
   - i.e. Remove Duplicates
+- uses the `fast and slow pointer technique` also known as `tortoise and hare algorithm`
 
 ![sameDirections](../images/sameDirections.gif)
 
