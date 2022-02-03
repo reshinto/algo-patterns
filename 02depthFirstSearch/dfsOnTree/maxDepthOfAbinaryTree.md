@@ -14,11 +14,11 @@ Output: 3
 ### using return value method
 ```javascript
 class Node {
-    constructor(val, left = null, right = null) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
+  constructor(val, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
 }
 
 function treeMaxDepth(root) {
@@ -37,11 +37,11 @@ function treeMaxDepth(root) {
 ### using global variable method
 ```javascript
 class Node {
-    constructor(val, left = null, right = null) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
+  constructor(val, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
 }
 
 function treeMaxDepth(root) {
