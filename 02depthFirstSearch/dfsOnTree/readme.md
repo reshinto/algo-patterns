@@ -1,4 +1,4 @@
-# DFS on Trees
+# DFS on Tree
 ## Think like a node
 - The key to solving tree problems using DFS is to think from the perspective of a node instead of looking at the whole tree
   - This is in line with how recursion is written
