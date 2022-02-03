@@ -33,4 +33,4 @@ function removeDuplicates(arr) {
 - Time Complexity: `O(n)`
 - We simply traverse the array once moving from left to right
 
-![removeDuplicates](../images/removeDuplicates.gif)
+![removeDuplicates](../../images/removeDuplicates.gif)
