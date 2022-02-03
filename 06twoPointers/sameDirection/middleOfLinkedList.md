@@ -32,9 +32,6 @@ function middleOfLinkedList(nodes) {
 }
 ```
 ### Explanation
-
-![middleLinkedList](../images/middleLinkedList.gif)
-
 - If it was an array, then we can get its length and middle element trivially
 - For a linked list, we have to traverse it to find its length l
 - We can find l by traversing the list once and then find the middle element by traversing it again and stop on the l/2th element
@@ -45,3 +42,14 @@ function middleOfLinkedList(nodes) {
   - by the time the fast pointer reaches the end the slow pointer should be at exactly the middle of the list
 - Time Complexity: `O(n)`
   - Technically `O(n/2)` but constants are cut out from the time complexity and so we are left with just `O(n)`
+
+
+![middleLinkedList](../images/middleLinkedList.gif)
+
+- We have to check the existence of fast and fast.next in the while loop condition
+- We have to check fast because if list length is odd (illustrated above)
+  - the fast pointer would reach the last node
+- And if list length is even (illustrated below)
+  - the fast pointer would land on null (Node 6's next)
+
+![middleLinkedListOdd](../images/middleLinkedListOdd.gif)
