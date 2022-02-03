@@ -32,3 +32,5 @@ function removeDuplicates(arr) {
 - Using this key observation, we can devise a `fast/slow pointer solution`
 - Time Complexity: `O(n)`
 - We simply traverse the array once moving from left to right
+
+![removeDuplicates](../images/removeDuplicates.gif)
