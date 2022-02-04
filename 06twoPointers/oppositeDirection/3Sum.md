@@ -22,6 +22,16 @@ Examples
 
     Output: [[-4, 1, 3], [-3, -1, 4], [-3, 1, 2], [-2, -1, 3]]
 ```
+```
+input: [-1, 0, 1, 2, -1, -4]
+
+sort input: [-4, -1, -1, 0, 1, 2]
+              a   b            c
+
+    2 sum
+   |     |
+a + b + c = 0
+```
 - solution 1
 ```javascript
 const twoSum = function(nums, i, results) {
@@ -63,7 +73,7 @@ function tripletsWithSum0(nums) {
   nums.sort((a,b) => a - b);
 
   for (let i=0; i<nums.length; i++) {
-    // skip if there are duplicates
+    // skip if current element is a duplicate of the previous element
     if (i>0 && nums[i] === nums[i - 1]) {
       continue;
     }
