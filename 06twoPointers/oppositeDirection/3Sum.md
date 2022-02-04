@@ -63,7 +63,7 @@ function tripletsWithSum0(nums) {
   nums.sort((a,b) => a - b);
 
   for (let i=0; i<nums.length; i++) {
-    // skill if there are duplicates
+    // skip if there are duplicates
     if (i>0 && nums[i] === nums[i - 1]) {
       continue;
     }
