@@ -27,7 +27,7 @@
   - return the index after the slow pointer as the size of the array
 ### Opposite Directions
 - questions have two pointers that move in the opposite direction. 
-  - ie.e Two Sum Sorted
+  - i.e. Two Sum Sorted
 
 ![oppositeDirections](../images/oppositeDirections.gif)
 
