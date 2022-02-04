@@ -47,8 +47,8 @@ function tripletsWithSum0(nums) {
   const results = new Set();
   nums.sort((a,b) => a - b);
 
-  for(let i = 0 ; i < nums.length - 2 && nums[i] <= 0; i++) {
-    if(i == 0 || nums[i] !== nums[i - 1]) 
+  for(let i=0; i<nums.length - 2 && nums[i]<=0; i++) {
+    if(i === 0 || nums[i] !== nums[i - 1]) 
       twoSum(nums, i, results)
   }
 
