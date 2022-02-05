@@ -16,6 +16,7 @@ Examples:
   
   Output: False
 ```
+- solution 1
 ```javascript
 function isAlphabet(c) {
   return /^[a-zA-Z0-9]*$/.test(c);
@@ -35,6 +36,38 @@ function isPalindrome(s) {
   }
   return true;
 }
+```
+- solution 2
+```javascript
+function isLetter(code) {
+  if (((code >= 48) && (code <= 57))  // numbers
+  || ((code >= 97) && (code <= 122))) {  // lowercase
+    return true
+  }
+  return false
+}
+
+function isPalindrome(s) {
+  s = s.toLowerCase();
+  let start = 0;
+  let end = s.length - 1;
+  while (start < end) {
+    while (!isLetter(s.charCodeAt(start)) && start < end) {
+      start++;
+    }
+
+    while (!isLetter(s.charCodeAt(end)) && start < end) {
+      end--;
+    }
+
+    if (s.charAt(start) != s.charAt(end)) {
+      return false;
+    }
+    start++;
+    end--;
+  }
+  return true;
+};
 ```
 ### Explanation
 
