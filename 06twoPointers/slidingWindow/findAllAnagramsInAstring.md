@@ -40,30 +40,30 @@ function equalLetters(letters1, letters2) {
 }
 
 function updateLettersCount(letters, char, diff) {
-  const code = char.charCodeAt(0) - 'a'.charCodeAt(0);
+  const code = char.charCodeAt() - 'a'.charCodeAt();
   letters[code] += diff;
 }
 
 function findAllAnagrams(original, check) {
-  const currentLetters = new Array(26).fill(0);
-  const targetLetters = new Array(26).fill(0);
+  const originalLetters = new Array(26).fill(0);
+  const checkLetters = new Array(26).fill(0);
   const originalLength = original.length;
   const checkLength = check.length;
   const result = [];
 
   for (let i = 0; i < checkLength; i++) {
-    updateLettersCount(targetLetters, check[i], 1);
+    updateLettersCount(checkLetters, check[i], 1);
   }
 
   // move the window to the right at every cycle
   for (let i = 0; i < originalLength; i++) {
-    updateLettersCount(currentLetters, original[i], 1);
+    updateLettersCount(originalLetters, original[i], 1);
 
     // after setting up the window, start popping the leftmost character at every cycle
     if (i >= checkLength) {
-      updateLettersCount(currentLetters, original[i - checkLength], -1);
+      updateLettersCount(originalLetters, original[i - checkLength], -1);
     }
-    if (equalLetters(targetLetters, currentLetters)) {
+    if (equalLetters(checkLetters, originalLetters)) {
       result.push(i - checkLength + 1);
     }
   }
