@@ -55,11 +55,11 @@ function findAllAnagrams(original, check) {
     updateLettersCount(targetLetters, check[i], 1);
   }
 
-  // shift right pointer forward
+  // move the window to the right at every cycle
   for (let i = 0; i < originalLength; i++) {
     updateLettersCount(currentLetters, original[i], 1);
 
-    // shift left pointer forward & maintain window
+    // after setting up the window, start popping the leftmost character at every cycle
     if (i >= checkLength) {
       updateLettersCount(currentLetters, original[i - checkLength], -1);
     }
