@@ -18,58 +18,68 @@ Explanation: ab is the longest substring, length 2
 ```
 ```javascript
 function longestSubstringWithoutRepeatingCharacters(s) {
-  let slow = 0;
-  let fast = 0;
-  let result = 1;
-  const memo = {};
-  while (fast < s.length) {  // check fast because it will reach the end first
-    const char = s[fast];
-    if (!memo[char]) {
-      memo[char] = true;
-      fast++;
+  let left = 0;
+  let right = 0;
+  let max = 0;
+  let map = {};
+
+  while(right < s.length){
+    const rightChar = s[right];
+    if (map[rightChar]) {
+      map[rightChar] = map[rightChar] + 1;  // add duplicate count
     } else {
-      delete memo[char];  // remove from memory so that fast can continue to move forward
-      slow++;
+      map[rightChar] = 1;
     }
-    result = Math.max(result, fast - slow);
+
+    while (map[rightChar] > 1) {  // move left pointer, loop will only break when discovered duplicate has been removed from memory
+      const leftChar = s[left];
+      if (map[leftChar] === 1) {
+        delete map[leftChar];  // remove duplicate or any current and subsequent characters until arrive at duplicate
+      } else {
+        map[leftChar] = map[leftChar] - 1;  // reduce duplicate or any current and subsequent characters until arrive at duplicate
+      }
+      left++;
+    }
+    max = Math.max(max, right-left+1);
+    right++;
   }
-  return result;
+  return max;
 }
 ```
 ```
-f                   longest: 1, add A
+f                   longest: 1, add A: 1
 A B C D B E A
 s
 
-  f                 longest: 2, add B
+  f                 longest: 2, add B: 1
 A B C D B E A
 s
 
-    f               longest: 3, add C
+    f               longest: 3, add C: 1
 A B C D B E A
 s
 
-      f             longest: 4, add D
+      f             longest: 4, add D: 1
 A B C D B E A
 s
 
-        f           delete B
+        f           add B: 2, since A: 1, delete A, s + 1;
 A B C D B E A
 s
 
-        f           longest: 4, add B
+        f           since B: 2, reduce B duplicate by 1, thus B: 1, s + 1
 A B C D B E A
   s
+
+        f           since B not > 1 break loop, longest: 4 - 2 + 1 = 3
+A B C D B E A
+    s
+
+          f         longest: 4, add E: 1
+A B C D B E A
+    s
   
-          f         longest: 5, add E
-A B C D B E A
-  s
-
-            f       delete A
-A B C D B E A
-  s
-  
-            f       longest: 5, add A
+            f       longest: 5, add A: 1
 A B C D B E A
     s
     
