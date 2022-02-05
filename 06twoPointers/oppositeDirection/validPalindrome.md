@@ -18,15 +18,15 @@ Examples:
 ```
 ```javascript
 function isAlphabet(c) {
-  return /^[a-zA-Z]*$/.test(c);
+  return /^[a-zA-Z0-9]*$/.test(c);
 }
 
 function isPalindrome(s) {
   let left = 0;
   let right = s.length - 1;
   while (left < right) {
-    if (!isAlphabet(s[left])) left++;
-    if (!isAlphabet(s[right])) right--;
+    while (!isAlphabet(s[left]) && left < right) left++;
+    while (!isAlphabet(s[right]) && left < right) right--;
     if (s[left].toLowerCase() !== s[right].toLowerCase()) {
       return false;
     }
