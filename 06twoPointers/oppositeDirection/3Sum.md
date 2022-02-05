@@ -84,8 +84,13 @@ function tripletsWithSum0(nums) {
 
       if (sum === 0) {
         result.push([nums[i], nums[left], nums[right]]);
-        left++;  // update left pointer
-        while (nums[left] === nums[left - 1] && left < right) left++;  // keep shifting left pointer if is duplicate
+        // purpose of the following is just to move a pointer & prevent duplicates, then let the rest of the loop handle the rest
+        left++;
+        while (nums[left] === nums[left - 1] && left < right) left++;
+        /*
+        right--;
+        while (nums[right] === nums[right + 1] && left < right) right--;
+        */
       } else if (sum < 0) {
         left++;
       } else right--;
