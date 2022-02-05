@@ -25,12 +25,14 @@ function longestSubstringWithoutRepeatingCharacters(s) {
 
   while (fast < s.length) {
     const rChar = s[fast];
+    // check if exist in memory
     if (memo[rChar]) {
-      memo[rChar] += 1;
+      memo[rChar] += 1;  // if exist, add count
     } else {
       memo[rChar] = 1;
     }
 
+    // if duplicate is found, remove or reduce current elements until duplicate is discovered, then remove duplicate
     while (memo[rChar] > 1) {
       const lChar = s[slow];
       if (memo[lChar] === 1) {
