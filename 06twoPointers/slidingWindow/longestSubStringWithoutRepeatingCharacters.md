@@ -18,30 +18,30 @@ Explanation: ab is the longest substring, length 2
 ```
 ```javascript
 function longestSubstringWithoutRepeatingCharacters(s) {
-  let left = 0;
-  let right = 0;
+  let slow = 0;
+  let fast = 0;
   let max = 0;
-  let map = {};
+  const memo = {};
 
-  while(right < s.length){
-    const rightChar = s[right];
-    if (map[rightChar]) {
-      map[rightChar] = map[rightChar] + 1;  // add duplicate count
+  while (fast < s.length) {
+    const rChar = s[fast];
+    if (memo[rChar]) {
+      memo[rChar] += 1;
     } else {
-      map[rightChar] = 1;
+      memo[rChar] = 1;
     }
 
-    while (map[rightChar] > 1) {  // move left pointer, loop will only break when discovered duplicate has been removed from memory
-      const leftChar = s[left];
-      if (map[leftChar] === 1) {
-        delete map[leftChar];  // remove duplicate or any current and subsequent characters until arrive at duplicate
+    while (memo[rChar] > 1) {
+      const lChar = s[slow];
+      if (memo[lChar] === 1) {
+        delete memo[lChar];
       } else {
-        map[leftChar] = map[leftChar] - 1;  // reduce duplicate or any current and subsequent characters until arrive at duplicate
+        memo[lChar] -= 1;
       }
-      left++;
+      slow++;
     }
-    max = Math.max(max, right-left+1);
-    right++;
+    max = Math.max(max, fast - slow + 1);    
+    fast++;
   }
   return max;
 }
