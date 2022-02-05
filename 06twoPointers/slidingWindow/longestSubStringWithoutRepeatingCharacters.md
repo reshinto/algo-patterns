@@ -87,6 +87,9 @@ A B C D B E A
 A B C D B E A
     s
 ```
+
+![slidingWindow](../../images/slidingWindow.gif)
+
 ### Explanation
 - For a substring starting with start that already contains one duplicate character we want to stop checking more substrings with start index
 - When this happens we want to increment start and look at next set of substrings
