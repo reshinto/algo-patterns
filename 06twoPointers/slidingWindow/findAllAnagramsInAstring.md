@@ -40,8 +40,8 @@ function equalLetters(letters1, letters2) {
 }
 
 function updateLettersCount(letters, char, diff) {
-  const code = char.charCodeAt() - 'a'.charCodeAt();
-  letters[code] += diff;
+  const letterIndex = char.charCodeAt() - 'a'.charCodeAt();
+  letters[letterIndex] += diff;
 }
 
 function findAllAnagrams(original, check) {
