@@ -43,7 +43,47 @@
     - we update the window according to the changes instead of recalculating everything
 - i.e. Longest Substring without Repeating Characters 
 
-![slidingWindow](../images/slidingWindow.gif)
+```
+f                   longest: 1, add A
+A B C D B E A
+s
+
+  f                 longest: 2, add B
+A B C D B E A
+s
+
+    f               longest: 3, add C
+A B C D B E A
+s
+
+      f             longest: 4, add D
+A B C D B E A
+s
+
+        f           delete B
+A B C D B E A
+s
+
+        f           longest: 4, add B
+A B C D B E A
+  s
+  
+          f         longest: 5, add E
+A B C D B E A
+  s
+
+            f       delete A
+A B C D B E A
+  s
+  
+            f       longest: 5, add A
+A B C D B E A
+    s
+    
+              f     loop breaks
+A B C D B E A
+    s
+```
 
 - we keep track of the number of characters that appear in the window
 - We move the later pointer, inserting the item into the set, until there is a duplicate
