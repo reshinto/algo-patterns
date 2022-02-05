@@ -18,42 +18,21 @@ Output: 7
 
 Explanation: the smallest element is 2 and its index is 7.
 ```
-- solution 1
 ```javascript
 function findMinRotated(arr) {
   let left = 0;
   let right = arr.length - 1;
-  let min = -1;
-
-  while (left <= right) {
+  while (left < right) {
     const mid = Math.floor((left + right) / 2);
-    if (arr[mid] <= arr[right]) {
-      min = mid;
-      right = mid - 1;
+    if (arr[mid-1] > arr[mid]) {
+      return mid;
+    } else if (arr[mid] > arr[right]) {
+      left = mid + 1;
     } else {
-      left = mid + 1;
-    }
-  }
-  return min;
-}
-```
-- solution 2
-```javascript
-function findMinRotated(arr) {
-  let left = 0;
-  let right = arr.length - 1;
-  let min = -1;
-
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-    if (arr[right] >= arr[left]) {
-      min = mid
       right = mid - 1;
-    } else if (arr[right] < arr[left]) {
-      left = mid + 1;
     }
   }
-  return min;
+  return left;
 }
 ```
 ### Explanation
