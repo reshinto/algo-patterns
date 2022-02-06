@@ -157,7 +157,7 @@ function getMinimumWindow(s, t) {
 
   for (let i=0; i<sLength; i++) {
     const char = s[i];
-    if (tMemo[char]) {
+    if (tMemo[char]) {  // add or increment element into sMemo if is what we are looking for
       sMemo[char] ? sMemo[char] += 1 : sMemo[char] = 1;
       if (tMemo[char] === sMemo[char]) have++;
     }
@@ -165,7 +165,7 @@ function getMinimumWindow(s, t) {
     while (have === need) {
       const leftChar = s[left];
       const windowLength = i - left + 1;
-      if (result === "" || windowLength < result.length) {
+      if (!result || windowLength < result.length) {
         result = s.substring(left, i+1);
       } else if (windowLength === result.length) {  // remove this if comparing between same length string is not required
         for (let j=0; j<windowLength; j++) {
