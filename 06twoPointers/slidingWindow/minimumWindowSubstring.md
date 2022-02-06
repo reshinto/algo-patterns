@@ -189,6 +189,8 @@ function getMinimumWindow(s, t) {
 
 ![minimumWindowSubstring](../../images/minimumWindowSubstring.gif)
 
+![minimumWindowSubstring](../../images/minimumWindowSubstring.png)
+
 ### Explanation
 - The solution is similar to Find All Anagrams in a String,
   - except instead of matching exactly, we are to find a window that contains all characters in check
