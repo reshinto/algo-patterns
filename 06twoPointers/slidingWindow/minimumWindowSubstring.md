@@ -132,6 +132,60 @@ function getMinimumWindow(original, check) {
   return result;
 }
 ```
+- solution 3: most optimum
+```javascript
+function getMinimumWindow(s, t) {
+  const sLength = s.length;
+  const tLength = t.length;
+  if (tLength > sLength) return "";
+  let have = 0;
+  let need = 0;
+  const sMemo = {};
+  const tMemo = {};
+  let result = "";
+  let left = 0;
+
+  for (let i=0; i<tLength; i++) {
+    const char = t[i];
+    if (!tMemo[char]) {
+      tMemo[char] = 1;
+      need++;
+    } else {
+      tMemo[char] += 1;
+    }
+  }
+
+  for (let i=0; i<sLength; i++) {
+    const char = s[i];
+    if (tMemo[char]) {
+      sMemo[char] ? sMemo[char] += 1 : sMemo[char] = 1;
+      if (tMemo[char] === sMemo[char]) have++;
+    }
+
+    while (have === need) {
+      const leftChar = s[left];
+      const windowLength = i - left + 1;
+      if (result === "" || windowLength < result.length) {
+        result = s.substring(left, i+1);
+      } else if (windowLength === result.length) {  // remove this if comparing between same length string is not required
+        for (let j=0; j<windowLength; j++) {
+          if (s[left+j].charCodeAt() < result[j].charCodeAt()) {
+            result = s.substring(left, i+1);
+            break;
+          } else if (s[left+j].charCodeAt() > result[j].charCodeAt()) break;
+        }
+      }
+
+      sMemo[leftChar] > 1 ? sMemo[leftChar] -= 1 : delete sMemo[leftChar];
+      if (tMemo[leftChar] && (!sMemo[leftChar] || sMemo[leftChar] < tMemo[leftChar])) {
+        have--;
+      }
+      left++;
+    }
+  }
+  return result;
+}
+```
 
 ![minimumWindowSubstring](../../images/minimumWindowSubstring.gif)
 
