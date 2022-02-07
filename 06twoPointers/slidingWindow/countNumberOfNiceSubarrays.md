@@ -32,27 +32,27 @@ Constraints
   0 <= arr[i] <= 10^5
 ```
 ```javascript
-  // For the sake of easier calculation, let the zeroth odd index be -1.
-  // This way, we can easily calculate the number of even numbers before the first
-  // odd number using the same way as between two odd numbers.
-  const odds = [-1];
-  let answer = 0;
+// For the sake of easier calculation, let the zeroth odd index be -1.
+// This way, we can easily calculate the number of even numbers before the first
+// odd number using the same way as between two odd numbers.
+const odds = [-1];
+let answer = 0;
 
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] % 2 !== 0) odds.push(i);
-  }
+for (let i = 0; i < nums.length; i++) {
+  if (nums[i] % 2 !== 0) odds.push(i);
+}
 
-  // For the same reason as above, the final index is n, where n is the size of arr
-  odds.push(nums.length);
- 
-  for (let i = 1; i < odds.length - k; i++) {
-    const prevOdd = odds[i - 1];
-    const firstOdd = odds[i];
-    const lastOdd = odds[i + k - 1];
-    const nextOdd = odds[i + k];
-    answer += (firstOdd - prevOdd) * (nextOdd - lastOdd);
-  }
-  return answer;
+// For the same reason as above, the final index is n, where n is the size of arr
+odds.push(nums.length);
+
+for (let i = 1; i < odds.length - k; i++) {
+  const prevOdd = odds[i - 1];
+  const firstOdd = odds[i];
+  const lastOdd = odds[i + k - 1];
+  const nextOdd = odds[i + k];
+  answer += (firstOdd - prevOdd) * (nextOdd - lastOdd);
+}
+return answer;
 ```
 ```
 input: 
