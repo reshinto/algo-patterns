@@ -165,12 +165,13 @@ function getMinimumWindow(s, t) {
     while (have === need) {
       const leftChar = s[left];
       const windowLength = i - left + 1;
+      const windowStr = s.substring(left, i+1);
       if (!result || windowLength < result.length) {
-        result = s.substring(left, i+1);
+        result = windowStr;
       } else if (windowLength === result.length) {  // remove this if comparing between same length string is not required
         for (let j=0; j<windowLength; j++) {
           if (s[left+j].charCodeAt() < result[j].charCodeAt()) {
-            result = s.substring(left, i+1);
+            result = windowStr;
             break;
           } else if (s[left+j].charCodeAt() > result[j].charCodeAt()) break;
         }
