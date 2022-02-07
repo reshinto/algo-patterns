@@ -59,6 +59,7 @@ input:
   arr: 2 4 5 7 8 10 11 12 14 15 18 20
   k: 3
   
+all possible scenarios
 2 4 5 7 8 10 11 12 14
 2 4 5 7 8 10 11 12
 2 4 5 7 8 10 11
@@ -71,6 +72,25 @@ input:
 7 8 10 11 12 14 15 18 20
 7 8 10 11 12 14 15 18
 7 8 10 11 12 14 15
+
+// add -1 at index 0 for easy calculation
+// add arr length at last index as reference to the last not counted odd number
+odd indexes arr = [-1, 2, 3, 6, 9, 12]
+set i as 1 since that is where the index is within the arr
+set n as odds arr length - k to set the number of acceptable subarrays
+since k is 3, first range is [2, 3, 6], followed by [3, 6, 9]
+
+calculate the total possibilities incrementing the following for each loop
+(firstIndexOfOddNumInWindow - prevIndexOfOddNumOutsideWindow) * (nextToBeIndexOfOddNumOutsideWindow - prevLastIndexOfOddNumInWindow)
+(a - b) * (c - d)
+
+[-1, 2, 3, 6, 9, 12]
+  b  a     d  c
+  
+(2 - -1) * (9 - 6) = 9
++
+(3 - 2) * (12 - 6) = 3
+= 12
 
 output: 12
 ```
