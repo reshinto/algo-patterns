@@ -17,7 +17,7 @@
   - where h is the height of the tree
   - In the best case scenario, the height of the tree is proportional to the log of the size of the tree
 
-![bstSearch](../images/bstSearch.gif)
+![bstSearch](../../images/bstSearch.gif)
 
 ## Insertion
 - One advantage to using a BST compared to a sorted list (to keep track of which items exist in a collection) is that
@@ -28,7 +28,7 @@
   - where h is the height of the tree
   - Ideally, h is proportional to the log of the size of the tree
 
-![bstInsertion](../images/bstInsertion.png
+![bstInsertion](../../images/bstInsertion.png
 )
 
 ## Deletion (Optional)
@@ -111,7 +111,7 @@ console.log(find(seven, 13));
   - If, after the insertion of an element, a node becomes unbalanced, one of the subtree must have two more height than the others
   - Depending on which side is unbalanced, the balancing act is different
 
-![bstImprovements](../images/bstImprovements.gif)
+![bstImprovements](../../images/bstImprovements.gif)
 
 ## Applications
 - BST is often used to look up the existence of certain objects
