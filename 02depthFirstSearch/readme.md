@@ -82,9 +82,9 @@ class TreeNode {
 }
 
 function dfs(root, target) {
-    if (!root) return null;
-    if (root.val == target) return root;
+    if (!root) return null;  // always remain at this position
     
+    if (root.val == target) return root;
     return dfs(root.left, target) || dfs(root.right, target);
 }
 
