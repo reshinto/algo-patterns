@@ -72,7 +72,6 @@ console.log(factorialStack(5));
 ![dfs](../images/dfs.gif)
 
 ### Javascript
-- Recursion
 ```javascript
 class TreeNode {
   constructor(val) {
@@ -80,13 +79,6 @@ class TreeNode {
     this.left = null;
     this.right = null;
   }
-}
-
-function dfs(root, target) {
-  if (!root) return null;  // always remain at this position
-
-  if (root.val == target) return root;
-  return dfs(root.left, target) || dfs(root.right, target);
 }
 
 const one = new TreeNode(1)
@@ -101,20 +93,21 @@ one.right = six
 two.left = three
 two.right = four
 three.right = five
+```
+- Recursion
+```javascript
+function dfs(root, target) {
+  if (!root) return null;  // always remain at this position
+
+  if (root.val == target) return root;
+  return dfs(root.left, target) || dfs(root.right, target);
+}
 
 const node = dfs(one, 4)
 console.log(node.val)
 ```
 - Iteration
 ```javascript
-class TreeNode {
-  constructor(val) {
-    this.val = val;
-    this.left = null;
-    this.right = null;
-  }
-}
-
 function dfs(root, target) {
   if (!root) return null;
 
@@ -131,19 +124,6 @@ function dfs(root, target) {
     if (current.left) stack.push(current.left);
   }
 }
-
-const one = new TreeNode(1)
-const two = new TreeNode(2)
-const three = new TreeNode(3)
-const four = new TreeNode(4)
-const five = new TreeNode(5)
-const six = new TreeNode(6)
-
-one.left = two
-one.right = six
-two.left = three
-two.right = four
-three.right = five
 
 const node = dfs(one, 4)
 console.log(node.val)
