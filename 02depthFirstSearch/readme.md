@@ -82,10 +82,33 @@ class TreeNode {
 }
 
 function dfs(root, target) {
-    if (!root) return null;  // always remain at this position
+  if (!root) return null;  // always remain at this position
+
+  if (root.val == target) return root;
+  return dfs(root.left, target) || dfs(root.right, target);
+}
+
+function dfsIter(root, target) {
+  if (!root) return null;
+
+  const stack = [];
+  let current = root;
+  stack.push(current);
+
+  while (stack.length) {
+    current = stack.pop();  // always remain at this position
     
-    if (root.val == target) return root;
-    return dfs(root.left, target) || dfs(root.right, target);
+    if (current.val === target) {  // change this position for different traversal mode
+      return current;
+    }
+    if (current.right) {  // right child must be pushed first so that left child is processed first
+      stack.push(current.right);
+    }
+    if (current.left) {
+      stack.push(current.left);
+    }
+  }
+
 }
 
 const one = new TreeNode(1)
