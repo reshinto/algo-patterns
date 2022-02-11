@@ -72,6 +72,7 @@ console.log(factorialStack(5));
 ![dfs](../images/dfs.gif)
 
 ### Javascript
+- Recursion
 ```javascript
 class TreeNode {
   constructor(val) {
@@ -88,7 +89,33 @@ function dfs(root, target) {
   return dfs(root.left, target) || dfs(root.right, target);
 }
 
-function dfsIter(root, target) {
+const one = new TreeNode(1)
+const two = new TreeNode(2)
+const three = new TreeNode(3)
+const four = new TreeNode(4)
+const five = new TreeNode(5)
+const six = new TreeNode(6)
+
+one.left = two
+one.right = six
+two.left = three
+two.right = four
+three.right = five
+
+const node = dfs(one, 4)
+console.log(node.val)
+```
+- Iteration
+```javascript
+class TreeNode {
+  constructor(val) {
+    this.val = val;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function dfs(root, target) {
   if (!root) return null;
 
   const stack = [];
@@ -98,17 +125,11 @@ function dfsIter(root, target) {
   while (stack.length) {
     current = stack.pop();  // always remain at this position
     
-    if (current.val === target) {  // change this position for different traversal mode
-      return current;
-    }
-    if (current.right) {  // right child must be pushed first so that left child is processed first
-      stack.push(current.right);
-    }
-    if (current.left) {
-      stack.push(current.left);
-    }
+    if (current.val === target) return current;  // change this position for different traversal mode
+    
+    if (current.right) stack.push(current.right);  // right child must be pushed first so that left child is processed first
+    if (current.left) stack.push(current.left);
   }
-
 }
 
 const one = new TreeNode(1)
