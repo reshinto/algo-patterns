@@ -71,6 +71,112 @@ var lowestCommonAncestor = function(root, p, q) {
   return null;
 };
 ```
+```
+      3
+   /    \
+  5      1
+ / \    / \
+6   2  0   8
+   / \
+  7   4
+
+root = 3, p = 5, q = 4
+left:
+----------------
+| lca(5, 5, 4) |
+----------------
+root = 5 === p, return 5
+left = 5
+right:
+----------------
+| lca(1, 5, 4) |
+----------------
+
+
+root = 1, p = 5, q = 4
+left:
+----------------
+| lca(0, 5, 4) |
+| lca(1, 5, 4) |
+----------------
+
+root = 0, p = 5, q = 4
+left:
+--------------------
+|  lca(null, 5, 4) |
+|   lca(0, 5, 4)   |
+|   lca(1, 5, 4)   |
+--------------------
+!root, return root = null
+----------------
+| lca(0, 5, 4) |
+| lca(1, 5, 4) |
+----------------
+left = null
+right:
+--------------------
+|  lca(null, 5, 4) |
+|   lca(0, 5, 4)   |
+|   lca(1, 5, 4)   |
+--------------------
+!root, return root = null
+--------------------
+|   lca(0, 5, 4)   |
+|   lca(1, 5, 4)   |
+--------------------
+right = null
+since left and right is null, return null
+
+root = 1, p = 5, q = 4
+--------------------
+|   lca(1, 5, 4)   |
+--------------------
+left: null
+right:
+root = 8, p = 5, q = 4
+--------------------
+|   lca(8, 5, 4)   |
+|   lca(1, 5, 4)   |
+--------------------
+left:
+--------------------
+|  lca(null, 5, 4) |
+|   lca(8, 5, 4)   |
+|   lca(1, 5, 4)   |
+--------------------
+!root, return root = null
+----------------
+| lca(0, 5, 4) |
+| lca(1, 5, 4) |
+----------------
+left = null
+right:
+--------------------
+|  lca(null, 5, 4) |
+|   lca(8, 5, 4)   |
+|   lca(1, 5, 4)   |
+--------------------
+!root, return root = null
+--------------------
+|   lca(8, 5, 4)   |
+|   lca(1, 5, 4)   |
+--------------------
+right = null
+since left and right is null, return null
+
+root = 1, p = 5, q = 4
+--------------------
+|   lca(1, 5, 4)   |
+--------------------
+left: null
+right: null
+since left and right is null, return null
+
+root = 3, p = 5, q = 4
+left: 5
+right: null
+since right is null, and left is not null, return left
+```
 ### Explanation
 - When we think as a node, there could be five scenarios of how we are relative to the LCA and two target nodes
   - Current node is LCA
