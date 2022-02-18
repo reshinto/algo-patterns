@@ -5,6 +5,26 @@ Given a binary tree,
 write a serialize function that converts the tree into a string
 and a deserialize function that converts a string to a binary tree.
 You may serialize the tree into any string representation you want as long as it can be deseralized.
+
+Example 1: serialize
+  input:
+    6
+   / \
+  4   8
+ / \
+3   5
+
+  output: "6 4 3 x x 5 x x 8 x x"
+  
+Example 2: deserialize
+  input: "6 4 3 x x 5 x x 8 x x"
+  
+  output:
+    6
+   / \
+  4   8
+ / \
+3   5
 ```
 ```javascript
 class Node {
