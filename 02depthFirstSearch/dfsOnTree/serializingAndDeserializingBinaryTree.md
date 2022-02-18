@@ -14,35 +14,67 @@ class Node {
     this.right = right;
   }
 }
-
+```
+- solution 1: using iterators
+```javascript
 function serialize(root) {
   let res = [];
-  serialize_dfs(root, res);
+  serializeDfs(root, res);
   return res.join(" ");
 }
 
-function serialize_dfs(root, res) {
+function serializeDfs(root, res) {
   if (!root) {
     res.push("x");
     return;
   }
   res.push(root.val);
-  serialize_dfs(root.left, res);
-  serialize_dfs(root.right, res);
+  serializeDfs(root.left, res);
+  serializeDfs(root.right, res);
 }
 
 function deserialize(s) {
   // create an iterator that returns a token each time we call `next`
-  return deserialize_dfs(s.split(" ")[Symbol.iterator]());
+  return deserializeDfs(s.split(" ")[Symbol.iterator]());
 }
 
-function deserialize_dfs(nodes) {
+function deserializeDfs(nodes) {
   let val = nodes.next().value;
   if (val === 'x') return;
   const cur = new Node(parseInt(val, 10));
-  cur.left = deserialize_dfs(nodes);
-  cur.right = deserialize_dfs(nodes);
+  cur.left = deserializeDfs(nodes);
+  cur.right = deserializeDfs(nodes);
   return cur;
+}
+```
+- solution 2: using arrays
+```javascript
+function serializeDfs(root, result) {
+  if (!root) return result.push("x");
+  result.push(root.val);
+  serializeDfs(root.left, result);
+  serializeDfs(root.right, result);
+}
+
+function serialize(root) {
+  const result = [];
+  serializeDfs(root, result);
+  return result.join(" ");
+}
+
+function deserializeDfs(arr) {
+  if (!arr.length) return null;
+  const currentVal = arr.shift();
+  const current = currentVal === "x" ? null : new Node(parseInt(currentVal, 10));
+  if (current) {
+    current.left = deserializeDfs(arr);
+    current.right = deserializeDfs(arr);
+  }
+  return current;
+}
+
+function deserialize(s) {
+  return deserializeDfs(s.split(" "));
 }
 ```
 ### Explanation
