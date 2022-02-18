@@ -35,6 +35,15 @@ function deserialize(s) {
   // create an iterator that returns a token each time we call `next`
   return deserialize_dfs(s.split(" ")[Symbol.iterator]());
 }
+
+function deserialize_dfs(nodes) {
+  let val = nodes.next().value;
+  if (val === 'x') return;
+  const cur = new Node(parseInt(val, 10));
+  cur.left = deserialize_dfs(nodes);
+  cur.right = deserialize_dfs(nodes);
+  return cur;
+}
 ```
 ### Explanation
 - To serialize, we can simply do a DFS and append the node value to the string
