@@ -34,6 +34,30 @@ Constraints
 1 <= d <= len(weights)
 1 <= weights[i] <= 500
 ```
+- Solution 1
+```javascript
+function minMaxWeight(weights, days) {
+  let left = Math.max(...weights);
+  let right = weights.reduce((a, b) => a + b);
+  while (left < right) {
+    const mid = Math.floor((left + right) / 2);
+    let totalDays = 1;
+    let totalWeight = 0;
+    for (let i=0; i<weights.length; i++) {
+      if (totalWeight + weights[i] > mid) {
+        totalDays++;
+        totalWeight = weights[i];
+      } else {
+        totalWeight += weights[i];
+      }
+    }
+    if (totalDays > days) left = mid + 1;
+    else right = mid;
+  }
+  return left;
+}
+```
+- Solution 2
 ```javascript
 function feasible(weights, maxWeight, d) {
   let days = 1;
