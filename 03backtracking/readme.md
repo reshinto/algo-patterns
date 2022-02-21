@@ -68,16 +68,15 @@ class Node {
 function dfs(root, path, res) {
   // exit condition, reached leaf node, append paths to results
   if (root.children.length === 0) {
-    path.push(root.val);
-    const cur_path = path.join('->');
-    res.push(cur_path);
-    path.pop();
+    path.push(root.val);  // add current node value to path if children is null
+    res.push(path.join('->'));
+    path.pop();  // remove recent add node value from path
     return;
   }
   // dfs on each non-null child
   for (const child of root.children) {
     if (child) {
-      path.push(root.val);
+      path.push(root.val);  // add current node value to path if children exist
       dfs(child, path, res);
       path.pop();
     }
