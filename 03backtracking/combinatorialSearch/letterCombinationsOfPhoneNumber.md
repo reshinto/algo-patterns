@@ -28,6 +28,7 @@ const phoneMap = {
 }
 
 function letterCombinationsOfPhoneNumber(digits) {
+  if (!digits) return [];
   const result = [];
   dfs(digits, [], result);
   return result;
