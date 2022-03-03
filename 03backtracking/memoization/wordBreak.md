@@ -55,7 +55,21 @@ function dfs(s, words, i) {
   return false;
 }
 ```
-- Solution3: using memoization
+- Solution 3:
+```javascript
+function wordBreak(s, words, start=0, memo=[]) {
+  if (start === s.length) return true;
+  if (memo[start] !== undefined) return memo[start];
+  
+  for (let i = 0, len = s.length; i + start <= len; i++) {
+    if (words.indexOf(s.substr(start, i)) > -1 && wordBreak(s, words, i + start, memo)) {
+      return memo[start] = true;
+    }
+  }
+  return memo[start] = false;;
+}
+```
+- Solution 4: using memoization
 ```javascript
 function wordBreak(s, words) {
   return dfs(s, words, 0, {});
