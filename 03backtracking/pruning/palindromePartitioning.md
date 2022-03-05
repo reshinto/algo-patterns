@@ -41,7 +41,7 @@ function dfs(s, ans, n, start, curPath) {
 
 ![palindromePartitioning](../../images/palindromePartitioning.png)
 
-- Space-state Tree
+#### Space-state Tree
 
 ![palindromePartitioningTree](../../images/palindromePartitioningTree.png)
 
