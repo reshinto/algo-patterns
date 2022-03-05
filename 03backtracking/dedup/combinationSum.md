@@ -67,7 +67,7 @@ function dfs(nums, startIndex, remaining, path, result) {
 #### State-space Tree
 - The only problem is that we have duplicate combinations in our results.
 
-![combindationSumDuplicates](../../images/combindationSumDuplicates.png)
+![combinationSumDuplicates](../../images/combinationSumDuplicates.png)
 
 #### Dedup
 - The way we dedup is to only use candidate numbers whose index in the array is >= last used number's index
@@ -75,13 +75,13 @@ function dfs(nums, startIndex, remaining, path, result) {
 - This is because by DFS order 
   - we already explored subtracting 2 and during that traversal we have considered using 3 (blue nodes)
 
-![combindationSumDedup](../../images/combindationSumDedup.png)
+![combinationSumDedup](../../images/combinationSumDedup.png)
 
 - We use an additional state start_index to keep track of the position of the last used number
   - "start" "index" because it is the index you want to start building new branches from
   - Final tree with duplicate branch pruned.
 
-![combindationSumNoDuplicates](../../images/combindationSumNoDuplicates.png)
+![combinationSumNoDuplicates](../../images/combinationSumNoDuplicates.png)
 
 - This idea of establishing order and pruning backward branches a is very useful de-duplication technique
   - You can also use it in two-pointer problems that has duplicate candidates.
