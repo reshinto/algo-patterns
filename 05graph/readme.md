@@ -73,6 +73,10 @@ function bfsByQueue(root) {
 ```
 - BFS on graph
 ```javascript
+function getNeightbors(neighbors, node) {
+  return neighbors[node];
+}
+
 function bfs(root) {
   const queue = [root];
   const visisted = new Set();
@@ -91,15 +95,15 @@ function bfs(root) {
 - Sometimes we need to track how many levels we have traversed (much like level order traversal problem in BFS on Tree module).
 - Similar to binary tree level order traversal, we can get the number of nodes of a level from the queue size.
 ```javascript
-function bfs_level(root) {
+function bfsLevel(root) {
   const queue = [root];
   const visisted = new Set();
   let level = 0;
   while (queue.length > 0) {
     const n = queue.length;  // get # of nodes in the current level
-    for (let i = 0; i < n; i++) {
+    for (let i=0; i<n; i++) {
       const node = queue.shift();
-      for (const neighbor of get_neighbors(node)) {
+      for (const neighbor of getNeighbors(node)) {
         if (visisted.has(neighbor)) continue;
         queue.push(neighbor);
         visisted.add(neighbor);
@@ -131,7 +135,7 @@ function dfs(root) {
 - DFS on graph
 ```javascript
 function dfs(root, visited) {
-  for (const neighbor of get_neighbors(root)) {
+  for (const neighbor of getNeighbors(root)) {
     if (visited.has(neighbor)) continue;
     visited.add(neighbor);
     dfs(neighbor, visited);
@@ -154,4 +158,3 @@ function dfs(root, visited) {
 |-|-|
 |finding the shortest distance between two vertices|uses less memory than BFS for wide graphs, since BFS has to keep all the nodes in the queue, and for wide graphs this can be quite large.|
 |graph of unknown size, e.g. `word ladder`, or even infinite size, e.g. `knight shortest path`|finding nodes far away from the root, e.g. looking for an exit in a maze.|
-
