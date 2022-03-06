@@ -144,4 +144,14 @@ function dfs(root, visited) {
     - the time complexity of BFS/DFS on graphs is normally expressed as `O(|V| + |E|)`
       - where |V| stands for number of vertices and |E| stands for number of edges
       - V is set of vertices and in math |V| means the size of a set
+## BFS or DFS
+### When should you use one over the other?
+- If you just have to visit each node once without memory constraints (e.g. `number of islands` problem), 
+  - then it doesn't really matter which one you use.
+  - It comes down to your personal preference for recursion/stack vs queue.
+
+|BFS is better at|DFS is better at|
+|-|-|
+|finding the shortest distance between two vertices|uses less memory than BFS for wide graphs, since BFS has to keep all the nodes in the queue, and for wide graphs this can be quite large.|
+|graph of unknown size, e.g. `word ladder`, or even infinite size, e.g. `knight shortest path`|finding nodes far away from the root, e.g. looking for an exit in a maze.|
 
