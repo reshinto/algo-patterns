@@ -73,8 +73,8 @@ function bfsByQueue(root) {
 ```
 - BFS on graph
 ```javascript
-function getNeightbors(neighbors, node) {
-  return neighbors[node];
+function getNeighbors(graph, node) {
+  return graph[node];
 }
 
 function bfs(root) {
