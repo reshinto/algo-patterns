@@ -50,7 +50,7 @@ var containsDuplicate2 = function(nums) {
 };
 ```
 ```python
-def containsDuplicate1(self, nums: List[int]) -> bool:
+def containsDuplicate1(nums: List[int]) -> bool:
   hashSet = set()
 
   for num in nums:
@@ -61,7 +61,7 @@ def containsDuplicate1(self, nums: List[int]) -> bool:
   return False
 
 
-def containsDuplicate2(self, nums: List[int]) -> bool:
+def containsDuplicate2(nums: List[int]) -> bool:
   memo = {}
 
   for num in nums:
@@ -112,9 +112,11 @@ class Solution2 {
 ```
 Two Sum
 
-Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+Given an array of integers nums and an integer target,
+return indices of the two numbers such that they add up to target.
 
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You may assume that each input would have exactly one solution,
+and you may not use the same element twice.
 
 You can return the answer in any order.
 
@@ -153,7 +155,7 @@ var twoSum = function(nums, target) {
 };
 ```
 ```python
-def twoSum(self, nums: List[int], target: int) -> List[int]:
+def twoSum(nums: List[int], target: int) -> List[int]:
   memo = {}
 
   for i, v in enumerate(nums):
@@ -226,7 +228,7 @@ var isAnagram = function(s, t) {
 };
 ```
 ```python
-def isAnagram(self, s: str, t: str) -> bool:
+def isAnagram(s: str, t: str) -> bool:
   if len(s) != len(t):
     return False
 
