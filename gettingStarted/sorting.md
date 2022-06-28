@@ -8,6 +8,25 @@
 - `in-place sorting algorithm` means that the algorithm does not use additional data structure to hold temporary data
   - Additional memory cannot be avoided (as swapping two elements involve additional memory)
     - but they should be something like a temporary variable that uses very little additional memory
+
+|Algorithm|Best Time|Average Time|Worst Time|Space|
+|-|-|-|-|-|
+|Bubble Sort|Ω(n^2)|θ(n^2)|O(n^2)|O(1)|
+|Selection Sort|Ω(n^2)|θ(n^2)|O(n^2)|O(1)|
+|Revised Bubble Sort|Ω(n)|θ(n^2)|O(n^2)|O(1)|
+|Insertion Sort|Ω(n)|θ(n^2)|O(n^2)|O(1)|
+|Quick Sort|Ω(n log(n))|θ(n log(n))|O(n^2)|O(log(n))|
+|Tree Sort|Ω(n log(n))|θ(n log(n))|O(n^2)|O(n)|
+|Bucket Sort|Ω(n + k)|θ(n + k)|O(n^2)|O(n)|
+|Heap Sort|Ω(n log(n))|θ(n log(n))|O(n log(n))|O(1)|
+|Merge Sort|Ω(n log(n))|θ(n log(n))|O(n log(n))|O(n)|
+|Shell Sort|Ω(n)|θ(n log(n))|O(n log(n))|O(1)|
+|Cube Sort|Ω(n)|θ(n log(n))|O(n log(n))|O(n)|
+|Tim Sort|Ω(n)|θ(n log(n))|O(n log(n))|O(n)|
+|Radix Sort|Ω(nk)|θ(nk)|O(nk)|O(n + k)|
+|Count Sort|Ω(n + k)|θ(n + k)|O(n + k)|O(k)|
+
+
 ## Insertion Sort
 - idea of an insertion sort is initially, only the first item is considered sorted
   - Then, for each item in the sequence, we "insert" that item into the sorted list by swapping that item with the item before it
@@ -874,7 +893,7 @@ output: [1, 2, 3, 4, 5]
 - can use if there are a lot of integers to be sorted, but the range of these integers are very small
 - uses an array, with the index being the entries from the list and the value being the number of times a number has appeared in the list
 ### time space complexity
-- has a low time complexity of `O(n)`
+- has a worst time complexity of `O(n^2)`
 - has a space complexity of `O(m)`, where m is the range of the integers
 ## Built-in sorting
 - most modern programming language have a built-in sorting function
